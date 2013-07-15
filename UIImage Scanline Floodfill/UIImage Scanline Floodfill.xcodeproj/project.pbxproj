@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184444CE1794437E00E5B61D /* UIImage+FloodFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 184444CD1794437E00E5B61D /* UIImage+FloodFill.m */; };
 		18BB5856179441110025F8DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5855179441110025F8DB /* UIKit.framework */; };
 		18BB5858179441110025F8DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5857179441110025F8DB /* Foundation.framework */; };
 		18BB585A179441110025F8DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5859179441110025F8DB /* CoreGraphics.framework */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184444CC1794437E00E5B61D /* UIImage+FloodFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FloodFill.h"; sourceTree = "<group>"; };
+		184444CD1794437E00E5B61D /* UIImage+FloodFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FloodFill.m"; sourceTree = "<group>"; };
 		18BB5852179441110025F8DB /* UIImage Scanline Floodfill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIImage Scanline Floodfill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BB5855179441110025F8DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18BB5857179441110025F8DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +86,8 @@
 		18BB585B179441110025F8DB /* UIImage Scanline Floodfill */ = {
 			isa = PBXGroup;
 			children = (
+				184444CC1794437E00E5B61D /* UIImage+FloodFill.h */,
+				184444CD1794437E00E5B61D /* UIImage+FloodFill.m */,
 				18BB5864179441110025F8DB /* AppDelegate.h */,
 				18BB5865179441110025F8DB /* AppDelegate.m */,
 				18BB586D179441110025F8DB /* MainStoryboard.storyboard */,
@@ -176,6 +181,7 @@
 				18BB5862179441110025F8DB /* main.m in Sources */,
 				18BB5866179441110025F8DB /* AppDelegate.m in Sources */,
 				18BB5872179441110025F8DB /* ViewController.m in Sources */,
+				184444CE1794437E00E5B61D /* UIImage+FloodFill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +304,7 @@
 				18BB5877179441110025F8DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
