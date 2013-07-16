@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		184444CE1794437E00E5B61D /* UIImage+FloodFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 184444CD1794437E00E5B61D /* UIImage+FloodFill.m */; };
+		18B5B71417952AD80060B582 /* LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5B71317952AD80060B582 /* LinkedList.m */; };
 		18BB5856179441110025F8DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5855179441110025F8DB /* UIKit.framework */; };
 		18BB5858179441110025F8DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5857179441110025F8DB /* Foundation.framework */; };
 		18BB585A179441110025F8DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5859179441110025F8DB /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* Begin PBXFileReference section */
 		184444CC1794437E00E5B61D /* UIImage+FloodFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FloodFill.h"; sourceTree = "<group>"; };
 		184444CD1794437E00E5B61D /* UIImage+FloodFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FloodFill.m"; sourceTree = "<group>"; };
+		18B5B71217952AD80060B582 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
+		18B5B71317952AD80060B582 /* LinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedList.m; sourceTree = "<group>"; };
 		18BB5852179441110025F8DB /* UIImage Scanline Floodfill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIImage Scanline Floodfill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BB5855179441110025F8DB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18BB5857179441110025F8DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +89,8 @@
 		18BB585B179441110025F8DB /* UIImage Scanline Floodfill */ = {
 			isa = PBXGroup;
 			children = (
+				18B5B71217952AD80060B582 /* LinkedList.h */,
+				18B5B71317952AD80060B582 /* LinkedList.m */,
 				184444CC1794437E00E5B61D /* UIImage+FloodFill.h */,
 				184444CD1794437E00E5B61D /* UIImage+FloodFill.m */,
 				18BB5864179441110025F8DB /* AppDelegate.h */,
@@ -182,6 +187,7 @@
 				18BB5866179441110025F8DB /* AppDelegate.m in Sources */,
 				18BB5872179441110025F8DB /* ViewController.m in Sources */,
 				184444CE1794437E00E5B61D /* UIImage+FloodFill.m in Sources */,
+				18B5B71417952AD80060B582 /* LinkedList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +275,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Prefix.pch";
 				INFOPLIST_FILE = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -280,6 +287,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Prefix.pch";
 				INFOPLIST_FILE = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

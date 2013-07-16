@@ -18,6 +18,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    LinkedList *ll = [[LinkedList alloc] initWithCapacity:10];
+    
+    [ll pushFrontX:10 andY:20];
+    
+    int x, y;
+    
+    [ll popFront:&x andY:&y];
+    
+    NSLog(@"%d %d",x , y);
 }
 
 - (void)didReceiveMemoryWarning

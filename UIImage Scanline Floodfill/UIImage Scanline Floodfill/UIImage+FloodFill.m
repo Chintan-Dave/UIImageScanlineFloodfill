@@ -7,6 +7,7 @@
 //
 
 
+
 #import "UIImage+FloodFill.h"
 
 @implementation UIImage (FloodFill)
@@ -18,12 +19,15 @@
 {
     @try
     {
+        if([oldColor isEqual:newColor])
+            return self;
         /*
             First We create roqData from UIImage.
             We require this conversation so that we can use detail at pixcel like color at pixcel.
             You can get some discussion about this topic here:
             http://stackoverflow.com/questions/448125/how-to-get-pixel-data-from-a-uiimage-cocoa-touch-or-cgimage-core-graphics
          */
+        
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         
@@ -51,7 +55,17 @@
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         CGContextRelease(context);
         
+        NSUInteger x = starPoint.x;
+        NSUInteger y = starPoint.y;
         
+        NSUInteger y1;
+        BOOL spanLeft, spanRight;
+        
+        NSUInteger points[(height *width)];
+        
+        NSUInteger p = 10 * x + y;
+        
+    
     }
     @catch (NSException *exception)
     {

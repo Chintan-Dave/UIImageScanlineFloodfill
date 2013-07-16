@@ -14,5 +14,4 @@
                    withColor:(UIColor *)newColor
                      atPoint:(CGPoint)starPoint
                withTolerance:(int)olerance;
-
 @end
