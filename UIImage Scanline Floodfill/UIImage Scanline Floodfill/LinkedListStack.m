@@ -6,21 +6,24 @@
 //  Copyright (c) 2012 VisualPutty. All rights reserved.
 //
 
-#import "LinkedList.h"
+#import "LinkedListStack.h"
 
-@implementation LinkedList
+@implementation LinkedListStack
 
 #pragma mark - Initialisation
+/*
+ A linked List is create with size of <capicity>.
+ When you add more element that <capicity> than Lisk List is incressed by size <increment>
+ mul is value for H (for H see comment Stack methods)
+ */
 - (id)init
 {
     return [self initWithCapacity:500];
 }
-
 - (id)initWithCapacity:(int)capacity
 {
     return [self initWithCapacity:capacity incrementSize:500 andMultiplier:1000];
 }
-
 - (id)initWithCapacity:(int)capacity incrementSize:(int)increment andMultiplier:(int)mul
 {
     self = [super init];
@@ -44,10 +47,21 @@
     return self;
 }
 
-#pragma mark - DynamicSizedArray Protocol methods
+#pragma mark - Stack methods
+/*
+    X and Y are converted in single integer value (P) to push in stack.
+    And again that value (P) are converted to X and Y when popby using following equation:
+    
+    P = H * X + Y
+ 
+    X = P / H;
+    Y = P % H;
+ 
+    H is same for all X and Y and must be grater than Y. So generaly Height is prefered value;
+*/
 - (void)pushFrontX:(int)x andY:(int)y;
 {
-    int p = multiplier * x +y;
+    int p = multiplier * x + y;
     
     PointNode *node = [self getNextFreeNode];
     
@@ -56,7 +70,6 @@
     
     topNodeOffset = [self offsetOfNode:node];
 }
-
 
 - (int)popFront:(int *)x andY:(int *)y;
 {
@@ -85,10 +98,7 @@
     return value;
 }
 
-
-
 #pragma mark - utility functions
-
 - (int)offsetOfNode:(PointNode *)node
 {
     return node - (PointNode *)nodeCache.mutableBytes;
@@ -114,7 +124,6 @@
     freeNodeOffset = node->nextNodeOffset;
     return node;
 }
-
 
 - (void)initialiseNodesAtOffset:(int)offset count:(int)count
 {

@@ -18,7 +18,7 @@ typedef struct PointNode
     
 } PointNode;
 
-@interface LinkedList : NSObject
+@interface LinkedListStack : NSObject
 {
     NSMutableData *nodeCache;
     int freeNodeOffset;

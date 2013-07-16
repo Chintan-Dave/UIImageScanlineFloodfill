@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LinkedListStack.h"
+
+typedef struct {
+    int red;
+    int green;
+    int blue;
+    int alpha;
+} color;
 
 @interface UIImage (FloodFill)
 
 - (UIImage *) floodFillColor:(UIColor *)oldColor
                    withColor:(UIColor *)newColor
                      atPoint:(CGPoint)starPoint
-               withTolerance:(int)olerance;
+               withTolerance:(int)olerance
+                       image:(UIImage *)image;
 @end

@@ -14,20 +14,50 @@
 
 @implementation ViewController
 
+@synthesize imageView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    LinkedList *ll = [[LinkedList alloc] initWithCapacity:10];
+//    UIImage *img = [UIImage imageNamed:@"color.png"];
+//    
+//    NSLog(@"%lf",CACurrentMediaTime());
+//    
+//    UIImage *image = [imageView.image floodFillColor:[self colorAtPosition:CGPointMake(10, 200) inImage:img]
+//                                           withColor:[UIColor redColor]
+//                                             atPoint:CGPointMake(10, 200)
+//                                       withTolerance:1
+//                                               image:img];
+//    NSLog(@"%lf",CACurrentMediaTime());
+//    
+//    [imageView setImage:image];
+}
+
+- (UIColor *)colorAtPosition:(CGPoint)position inImage:(UIImage *)image
+{
     
-    [ll pushFrontX:10 andY:20];
+    CGRect sourceRect = CGRectMake(position.x, position.y, 1.f, 1.f);
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, sourceRect);
     
-    int x, y;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    unsigned char *buffer = malloc(4);
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
+    CGContextRef context = CGBitmapContextCreate(buffer, 1, 1, 8, 4, colorSpace, bitmapInfo);
+    CGColorSpaceRelease(colorSpace);
+    CGContextDrawImage(context, CGRectMake(0.f, 0.f, 1.f, 1.f), imageRef);
+    CGImageRelease(imageRef);
+    CGContextRelease(context);
     
-    [ll popFront:&x andY:&y];
+    CGFloat r = buffer[0] / 255.f;
+    CGFloat g = buffer[1] / 255.f;
+    CGFloat b = buffer[2] / 255.f;
+    CGFloat a = buffer[3] / 255.f;
     
-    NSLog(@"%d %d",x , y);
+    free(buffer);
+    
+    return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
 
 - (void)didReceiveMemoryWarning

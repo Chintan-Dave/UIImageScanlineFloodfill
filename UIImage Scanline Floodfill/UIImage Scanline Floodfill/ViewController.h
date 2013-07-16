@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LinkedList.h"
+#import "UIImage+FloodFill.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface ViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
