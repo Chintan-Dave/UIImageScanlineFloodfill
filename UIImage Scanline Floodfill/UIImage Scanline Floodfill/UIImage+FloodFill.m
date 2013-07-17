@@ -59,7 +59,7 @@
         //Get color at start point
         unsigned int byteIndex = (bytesPerRow * startPoint.y) + startPoint.x * bytesPerPixel;
         
-        unsigned int ocolor = [self colorCodeAtIndex:byteIndex forimage:imageData];
+        unsigned int ocolor = getColorCode(byteIndex, imageData);
         
         //Convert newColor to RGBA value so we can save it to image.
         const CGFloat *components = CGColorGetComponents(newColor.CGColor);
@@ -69,7 +69,7 @@
         int newBlue  = components[2] * 255;
         int newAlpha = 255;
         
-        if([self compareColor:ocolor withColor:((newRed << 24) | (newGreen << 16) | (newBlue << 8) | (newAlpha)) withTolerance:tolerance])
+        if(compareColor(ocolor, ((newRed << 24) | (newGreen << 16) | (newBlue << 8) | (newAlpha)), tolerance))
         {
             return self;
         }
@@ -107,15 +107,15 @@
             
             byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
-            color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+            color = getColorCode(byteIndex, imageData);
             
-            while(y1 >= 0 && [self compareColor:ocolor withColor:color withTolerance:tolerance])
+            while(y1 >= 0 && compareColor(ocolor, color, tolerance))
             {
                 y1--;
                 
                 byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
                 
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
             }
             
             y1++;
@@ -124,9 +124,9 @@
             
             byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
-            color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+            color = getColorCode(byteIndex, imageData);
             
-            while (y1 < height && [self compareColor:ocolor withColor:color withTolerance:tolerance])
+            while (y1 < height && compareColor(ocolor, color, tolerance))
             {
                 imageData[byteIndex + 0] = newRed;
                 imageData[byteIndex + 1] = newGreen;
@@ -135,30 +135,30 @@
                 
                 byteIndex = (bytesPerRow * y1) + (x - 1) * bytesPerPixel;
                 
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
                 
-                if(!spanLeft && x > 0 && [self compareColor:ocolor withColor:color withTolerance:tolerance])
+                if(!spanLeft && x > 0 && compareColor(ocolor, color, tolerance))
                 {
                     [points pushFrontX:(x - 1) andY:y1];
                     
                     spanLeft = YES;
                 }
-                else if(spanLeft && x > 0 && ![self compareColor:ocolor withColor:color withTolerance:tolerance])
+                else if(spanLeft && x > 0 && !compareColor(ocolor, color, tolerance))
                 {
                     spanLeft = NO;
                 }
                 
                 byteIndex = (bytesPerRow * y1) + (x + 1) * bytesPerPixel;
                 
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
                 
-                if(!spanRight && x < width - 1 && [self compareColor:ocolor withColor:color withTolerance:tolerance])
+                if(!spanRight && x < width - 1 && compareColor(ocolor, color, tolerance))
                 {
                     [points pushFrontX:(x + 1) andY:y1];
                     
                     spanRight = YES;
                 }
-                else if(spanRight && x < width - 1 && ![self compareColor:ocolor withColor:color withTolerance:tolerance])
+                else if(spanRight && x < width - 1 && !compareColor(ocolor, color, tolerance))
                 {
                     spanRight = NO;
                 }
@@ -169,7 +169,7 @@
                 {
                     byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
                 
-                    color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                    color = getColorCode(byteIndex, imageData);
                 }
             }
         }
@@ -182,7 +182,7 @@
             
             byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
-            color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+            color = getColorCode(byteIndex, imageData);
             
             while(y1 >= 0 && color == ocolor)
             {
@@ -190,7 +190,7 @@
                 
                 byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
         
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
             }
             
             y1++;
@@ -200,7 +200,7 @@
             
             byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
-            color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+            color = getColorCode(byteIndex, imageData);
             
             while (y1 < height && color == ocolor)
             {
@@ -211,7 +211,7 @@
                 
                 byteIndex = (bytesPerRow * y1) + (x - 1) * bytesPerPixel;
                 
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
                 
                 if(!spanLeft && x > 0 && color == ocolor)
                 {
@@ -226,7 +226,7 @@
                 
                 byteIndex = (bytesPerRow * y1) + (x + 1) * bytesPerPixel;
                 
-                color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                color = getColorCode(byteIndex, imageData);
                 
                 if(!spanRight && x < width - 1 && color == ocolor)
                 {
@@ -245,7 +245,7 @@
                 {
                     byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
                  
-                    color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+                    color = getColorCode(byteIndex, imageData);
                 }
             }
         }
@@ -270,10 +270,17 @@
 }
 
 /*
+    I have used pure C function because it is said than C function is faster than Objective - C method in call.
+    This two function are called most of time so it require that calling this work in speed.
+    I have not verified this performance so I like to here comment on this.
+*/
+
+/*
     This function extract color from image and convert it to integer represent.
+ 
     Converting to integer make comperation easy.
 */
-- (unsigned int) colorCodeAtIndex:(unsigned int)byteIndex forimage:(unsigned char*)imageData
+unsigned int getColorCode (unsigned int byteIndex, unsigned char *imageData)
 {
     unsigned int red   = imageData[byteIndex];
     unsigned int green = imageData[byteIndex + 1];
@@ -283,10 +290,15 @@
     return (red << 24) | (green << 16) | (blue << 8) | alpha;
 }
 
-- (BOOL) compareColor:(unsigned int)color1 withColor:(unsigned int)color2 withTolerance:(int)tolorance;
+/*
+    This function compare two color with counting tolerance value.
+ 
+    If color is between tolerance rancge than it return true other wise false.
+*/
+bool compareColor (unsigned int color1, unsigned int color2, int tolorance)
 {
     if(color1 == color2)
-        return YES;
+        return true;
         
     int red1   = ((0xff000000 & color1) >> 24);
     int green1 = ((0x00ff0000 & color1) >> 16);
@@ -308,9 +320,9 @@
         diffBlue  > tolorance ||
         diffAlpha > tolorance  )
     {
-        return NO;
+        return false;
     }
     
-    return YES;
+    return true;
 }
 @end
