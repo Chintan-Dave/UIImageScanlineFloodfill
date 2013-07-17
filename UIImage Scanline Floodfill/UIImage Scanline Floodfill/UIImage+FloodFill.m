@@ -12,26 +12,20 @@
 
 @implementation UIImage (FloodFill)
 
-- (UIImage *) floodFillColor:(UIColor *)oldColor
-                   withColor:(UIColor *)newColor
-                     atPoint:(CGPoint)starPoint
-               withTolerance:(int)olerance
-                       image:(UIImage *)image
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
 {
     @try
     {
-        if([oldColor isEqual:newColor])
-            return image;
         /*
-            First We create roqData from UIImage.
-            We require this conversation so that we can use detail at pixcel like color at pixcel.
+            First We create rowData from UIImage.
+            We require this conversation so that we can use detail at pixel like color at pixel.
             You can get some discussion about this topic here:
             http://stackoverflow.com/questions/448125/how-to-get-pixel-data-from-a-uiimage-cocoa-touch-or-cgimage-core-graphics
-         */
+        */
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         
-        CGImageRef imageRef = [image CGImage];
+        CGImageRef imageRef = [self CGImage];
         
         NSUInteger width = CGImageGetWidth(imageRef);
         NSUInteger height = CGImageGetHeight(imageRef);
@@ -53,25 +47,53 @@
         
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
-        unsigned int byteIndex = (bytesPerRow * starPoint.y) + starPoint.x * bytesPerPixel;
+        //Get color at start point
+        unsigned int byteIndex = (bytesPerRow * startPoint.y) + startPoint.x * bytesPerPixel;
         
         unsigned int ocolor = [self colorCodeAtIndex:byteIndex forimage:imageData];
-        unsigned int ncolor = [self colorCodeForColor:newColor];
         
-        int x = starPoint.x;
-        int y = starPoint.y;
+        //Convert newColor to RGBA value so we can save it to image.
+        const CGFloat *components = CGColorGetComponents(newColor.CGColor);
+        
+        int newRed   = components[0] * 255;
+        int newGreen = components[1] * 255;
+        int newBlue  = components[2] * 255;
+        int newAlpha = 255;
     
+        /*
+            We are using stack to store point.
+            Stack is implemented by LinkList.
+            To incress speed I have used NSMutableData insted of NSMutableArray.
+            To see Detail Of This implementation visit following leink.
+            http://iwantmyreal.name/blog/2012/09/29/a-faster-array-in-objective-c/
+        */
+        
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
+        
+        int x = startPoint.x;
+        int y = startPoint.y;
         
         [points pushFrontX:x andY:y];
         
+        /*
+            This algorithem is prety simple though it llook odd in Objective C syntex.
+            To get familer with this algorithm visit following link.
+            http://lodev.org/cgtutor/floodfill.html
+            You can read hole artical for knowledge. 
+            If you are familer with flood fill than got to Scanline Floodfill Algorithm With Stack (floodFillScanlineStack)
+        */
+        
+        int y1;
+        unsigned int color;
+        BOOL spanLeft,spanRight;
+        
         while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
-            int y1 = y;
+            y1 = y;
             
-            unsigned int byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
-            unsigned int color =  color = [self colorCodeAtIndex:byteIndex forimage:imageData];
+            color = [self colorCodeAtIndex:byteIndex forimage:imageData];
             
             while(y1 >= 0 && color == ocolor)
             {
@@ -84,8 +106,8 @@
             
             y1++;
         
-            BOOL spanLeft  = NO;
-            BOOL spanRight = NO;
+            spanLeft  = NO;
+            spanRight = NO;
             
             byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
             
@@ -93,17 +115,10 @@
             
             while (y1 < height && color == ocolor)
             {
-                byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
-                
-                int red   = (int)((0xff000000 & ncolor) >> 24);
-                int green = (int)((0x00ff0000 & ncolor) >> 16);
-                int blue  = (int)((0x0000ff00 & ncolor) >> 8);
-                int alpha = (int)(0x000000ff & ncolor);
-                
-                imageData[byteIndex + 0] = red;
-                imageData[byteIndex + 1] = green;
-                imageData[byteIndex + 2] = blue;
-                imageData[byteIndex + 3] = alpha;
+                imageData[byteIndex + 0] = newRed;
+                imageData[byteIndex + 1] = newGreen;
+                imageData[byteIndex + 2] = newBlue;
+                imageData[byteIndex + 3] = newAlpha;
                 
                 byteIndex = (bytesPerRow * y1) + (x - 1) * bytesPerPixel;
                 
@@ -112,7 +127,7 @@
                 if(!spanLeft && x > 0 && color == ocolor)
                 {
                     [points pushFrontX:(x - 1) andY:y1];
-                    
+                 
                     spanLeft = YES;
                 }
                 else if(spanLeft && x > 0 && color != ocolor)
@@ -127,7 +142,7 @@
                 if(!spanRight && x < width - 1 && color == ocolor)
                 {
                     [points pushFrontX:(x + 1) andY:y1];
-                    
+              
                     spanRight = YES;
                 }
                 else if(spanRight && x < width - 1 && color != ocolor)
@@ -143,6 +158,8 @@
             }
         }
         
+        //Convert Flood filled image row data back to UIImage object.
+        
         UIImage *result = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
         
         CGContextRelease(context);
@@ -156,6 +173,10 @@
     }
 }
 
+/*
+    This function extract color from image and convert it to integer represent.
+    Converting to integer make comperation easy.
+*/
 - (unsigned int) colorCodeAtIndex:(unsigned int)byteIndex forimage:(unsigned char*)imageData
 {
     unsigned int red   = imageData[byteIndex];
@@ -165,24 +186,5 @@
     
     return (red << 24) | (green << 16) | (blue << 8) | alpha;
 }
-- (unsigned int) colorCodeForColor:(UIColor *)color
-{
-    const CGFloat *components = CGColorGetComponents(color.CGColor);
-   
-    unsigned int red   = components[0] * 255;
-    unsigned int green = components[1] * 255;
-    unsigned int blue  = components[2] * 255;
-    unsigned int alpha = 255;
-    
-    unsigned int finalcolour = (red << 24) | (green << 16) | (blue << 8) | alpha;
-    
-    return finalcolour;
-}
 
-- (unsigned int) colorCodeForRed:(unsigned int)red green:(unsigned int)green blue:(unsigned int)blue alpha:(unsigned int)alpha;
-{
-    unsigned int finalcolour = (red << 24) | (green << 16) | (blue << 8) | alpha;
-    
-    return finalcolour;
-}
 @end

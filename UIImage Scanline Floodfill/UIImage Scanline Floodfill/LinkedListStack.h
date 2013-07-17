@@ -21,6 +21,7 @@ typedef struct PointNode
 @interface LinkedListStack : NSObject
 {
     NSMutableData *nodeCache;
+    
     int freeNodeOffset;
     int topNodeOffset;
     int _cacheSizeIncrements;
@@ -32,6 +33,5 @@ typedef struct PointNode
 - (id)initWithCapacity:(int)capacity;
 
 - (void)pushFrontX:(int)x andY:(int)y;
-
 - (int)popFront:(int *)x andY:(int *)y;
 @end

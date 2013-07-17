@@ -18,9 +18,5 @@ typedef struct {
 
 @interface UIImage (FloodFill)
 
-- (UIImage *) floodFillColor:(UIColor *)oldColor
-                   withColor:(UIColor *)newColor
-                     atPoint:(CGPoint)starPoint
-               withTolerance:(int)olerance
-                       image:(UIImage *)image;
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
 @end

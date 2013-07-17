@@ -12,18 +12,20 @@
 
 #pragma mark - Initialisation
 /*
- A linked List is create with size of <capicity>.
- When you add more element that <capicity> than Lisk List is incressed by size <increment>
- mul is value for H (for H see comment Stack methods)
- */
+    A linked List is create with size of <capicity>.
+    When you add more element that <capicity> than Lisk List is incressed by size <increment>
+    mul is value for H (for H see comment Stack methods)
+*/
 - (id)init
 {
     return [self initWithCapacity:500];
 }
+
 - (id)initWithCapacity:(int)capacity
 {
     return [self initWithCapacity:capacity incrementSize:500 andMultiplier:1000];
 }
+
 - (id)initWithCapacity:(int)capacity incrementSize:(int)increment andMultiplier:(int)mul
 {
     self = [super init];
