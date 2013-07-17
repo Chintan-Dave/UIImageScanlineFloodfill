@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		184444CE1794437E00E5B61D /* UIImage+FloodFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 184444CD1794437E00E5B61D /* UIImage+FloodFill.m */; };
+		184AEFFC1796C90300468401 /* image1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFF81796C90300468401 /* image1.PNG */; };
+		184AEFFD1796C90300468401 /* image2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFF91796C90300468401 /* image2.PNG */; };
+		184AEFFE1796C90300468401 /* image3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFFA1796C90300468401 /* image3.PNG */; };
+		184AEFFF1796C90300468401 /* image4.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFFB1796C90300468401 /* image4.PNG */; };
 		18B5B71417952AD80060B582 /* LinkedListStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5B71317952AD80060B582 /* LinkedListStack.m */; };
 		18BB5856179441110025F8DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5855179441110025F8DB /* UIKit.framework */; };
 		18BB5858179441110025F8DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5857179441110025F8DB /* Foundation.framework */; };
@@ -20,10 +24,6 @@
 		18BB586C179441110025F8DB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BB586B179441110025F8DB /* Default-568h@2x.png */; };
 		18BB586F179441110025F8DB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BB586D179441110025F8DB /* MainStoryboard.storyboard */; };
 		18BB5872179441110025F8DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB5871179441110025F8DB /* ViewController.m */; };
-		18F8646C1795906000EF0172 /* 54937.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F8646B1795902200EF0172 /* 54937.png */; };
-		18F86470179591EA00EF0172 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F8646F179591B200EF0172 /* iphone.png */; };
-		18F86471179591EC00EF0172 /* iphone1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F8646E179591B200EF0172 /* iphone1.jpg */; };
-		18F864731795940200EF0172 /* color1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F86472179593AF00EF0172 /* color1.png */; };
 		18F9BE0B1795885100F717C2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F9BE0A1795885100F717C2 /* QuartzCore.framework */; };
 		18F9BE0E17958C7200F717C2 /* FloodFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9BE0D17958BEF00F717C2 /* FloodFillImageView.m */; };
 /* End PBXBuildFile section */
@@ -31,6 +31,10 @@
 /* Begin PBXFileReference section */
 		184444CC1794437E00E5B61D /* UIImage+FloodFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FloodFill.h"; sourceTree = "<group>"; };
 		184444CD1794437E00E5B61D /* UIImage+FloodFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FloodFill.m"; sourceTree = "<group>"; };
+		184AEFF81796C90300468401 /* image1.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.PNG; sourceTree = "<group>"; };
+		184AEFF91796C90300468401 /* image2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.PNG; sourceTree = "<group>"; };
+		184AEFFA1796C90300468401 /* image3.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.PNG; sourceTree = "<group>"; };
+		184AEFFB1796C90300468401 /* image4.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.PNG; sourceTree = "<group>"; };
 		18B5B71217952AD80060B582 /* LinkedListStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedListStack.h; sourceTree = "<group>"; };
 		18B5B71317952AD80060B582 /* LinkedListStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedListStack.m; sourceTree = "<group>"; };
 		18BB5852179441110025F8DB /* UIImage Scanline Floodfill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIImage Scanline Floodfill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,10 +53,6 @@
 		18BB586E179441110025F8DB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		18BB5870179441110025F8DB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18BB5871179441110025F8DB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		18F8646B1795902200EF0172 /* 54937.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 54937.png; sourceTree = "<group>"; };
-		18F8646E179591B200EF0172 /* iphone1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iphone1.jpg; sourceTree = "<group>"; };
-		18F8646F179591B200EF0172 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
-		18F86472179593AF00EF0172 /* color1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color1.png; sourceTree = "<group>"; };
 		18F9BE0A1795885100F717C2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18F9BE0C17958BEF00F717C2 /* FloodFillImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloodFillImageView.h; sourceTree = "<group>"; };
 		18F9BE0D17958BEF00F717C2 /* FloodFillImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FloodFillImageView.m; sourceTree = "<group>"; };
@@ -73,6 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184AEFEF1796C64000468401 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				184AEFF81796C90300468401 /* image1.PNG */,
+				184AEFF91796C90300468401 /* image2.PNG */,
+				184AEFFA1796C90300468401 /* image3.PNG */,
+				184AEFFB1796C90300468401 /* image4.PNG */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		18BB5849179441110025F8DB = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +115,7 @@
 		18BB585B179441110025F8DB /* UIImage Scanline Floodfill */ = {
 			isa = PBXGroup;
 			children = (
+				184AEFEF1796C64000468401 /* Images */,
 				18F9BE0C17958BEF00F717C2 /* FloodFillImageView.h */,
 				18F9BE0D17958BEF00F717C2 /* FloodFillImageView.m */,
 				18B5B71217952AD80060B582 /* LinkedListStack.h */,
@@ -123,10 +135,6 @@
 		18BB585C179441110025F8DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				18F86472179593AF00EF0172 /* color1.png */,
-				18F8646E179591B200EF0172 /* iphone1.jpg */,
-				18F8646F179591B200EF0172 /* iphone.png */,
-				18F8646B1795902200EF0172 /* 54937.png */,
 				18BB585D179441110025F8DB /* UIImage Scanline Floodfill-Info.plist */,
 				18BB585E179441110025F8DB /* InfoPlist.strings */,
 				18BB5861179441110025F8DB /* main.m */,
@@ -189,15 +197,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18F86470179591EA00EF0172 /* iphone.png in Resources */,
 				18BB5860179441110025F8DB /* InfoPlist.strings in Resources */,
 				18BB5868179441110025F8DB /* Default.png in Resources */,
+				184AEFFF1796C90300468401 /* image4.PNG in Resources */,
 				18BB586A179441110025F8DB /* Default@2x.png in Resources */,
-				18F8646C1795906000EF0172 /* 54937.png in Resources */,
+				184AEFFE1796C90300468401 /* image3.PNG in Resources */,
 				18BB586C179441110025F8DB /* Default-568h@2x.png in Resources */,
-				18F864731795940200EF0172 /* color1.png in Resources */,
-				18F86471179591EC00EF0172 /* iphone1.jpg in Resources */,
 				18BB586F179441110025F8DB /* MainStoryboard.storyboard in Resources */,
+				184AEFFD1796C90300468401 /* image2.PNG in Resources */,
+				184AEFFC1796C90300468401 /* image1.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
