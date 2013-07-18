@@ -12,8 +12,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface ViewController : UIViewController
+
 @property (strong, nonatomic) IBOutlet FloodFillImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *txtTolerance;
+
 - (IBAction)btnSetTap:(UIButton *)sender;
+
+- (IBAction)btnColorTap:(UIButton *)sender;
 
 @end

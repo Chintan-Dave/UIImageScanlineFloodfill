@@ -10,7 +10,7 @@
 
 @implementation FloodFillImageView
 
-@synthesize tolorance;
+@synthesize tolorance,newcolor;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -19,7 +19,7 @@
     tpoint.x = tpoint.x * 2 ;
     tpoint.y = tpoint.y * 2 ;
     
-    UIImage *image1 = [self.image floodFillFromPoint:tpoint withColor:[UIColor redColor] andTolerance:tolorance];
+    UIImage *image1 = [self.image floodFillFromPoint:tpoint withColor:newcolor andTolerance:tolorance];
  
     dispatch_async(dispatch_get_main_queue(), ^(void)
     {

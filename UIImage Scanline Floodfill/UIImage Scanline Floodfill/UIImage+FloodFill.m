@@ -17,6 +17,9 @@
  
     tolerance  : If Tolerance is 0 than it will search for exact match of color 
                  other wise it will take range according to tolerance value.
+            
+                 If You dont want to use tolerance and want to incress performance Than you can change
+                 compareColor(ocolor, color, tolerance) with just ocolor==color which reduse function call.
 */
 - (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
 {
@@ -59,12 +62,29 @@
         unsigned int ocolor = getColorCode(byteIndex, imageData);
         
         //Convert newColor to RGBA value so we can save it to image.
+        
+        int newRed, newGreen, newBlue, newAlpha;
+        
         const CGFloat *components = CGColorGetComponents(newColor.CGColor);
         
-        int newRed   = components[0] * 255;
-        int newGreen = components[1] * 255;
-        int newBlue  = components[2] * 255;
-        int newAlpha = 255;
+        /*
+            If you are not getting why I have user CGColorGetNumberOfComponents than read following link:
+            http://stackoverflow.com/questions/9238743/is-there-an-issue-with-cgcolorgetcomponents
+        */
+        
+        if(CGColorGetNumberOfComponents(newColor.CGColor) == 2)
+        {
+            newRed = newGreen = newBlue = components[0] * 255;
+            newAlpha = components[1];
+        }
+        else if (CGColorGetNumberOfComponents(newColor.CGColor) == 4)
+        {
+            newRed   = components[0] * 255;
+            newGreen = components[1] * 255;
+            newBlue  = components[2] * 255;
+            newAlpha = 255;
+        }
+        
         
         if(compareColor(ocolor, ((newRed << 24) | (newGreen << 16) | (newBlue << 8) | (newAlpha)), tolerance))
         {
@@ -122,6 +142,8 @@
             
             while (y < height && compareColor(ocolor, color, tolerance))
             {
+                //Change old color with newColor RGBA value
+                
                 imageData[byteIndex + 0] = newRed;
                 imageData[byteIndex + 1] = newGreen;
                 imageData[byteIndex + 2] = newBlue;
@@ -174,86 +196,7 @@
             }
         }
         
-        //If You dont want ot use tolerance Than remove uppor while loop and use this commented while loop.
-        /*
-        while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
-        {
-            y = y;
-            
-            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
-            
-            color = getColorCode(byteIndex, imageData);
-            
-            while(y >= 0 && color == ocolor)
-            {
-                y--;
-                
-                byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
-        
-                color = getColorCode(byteIndex, imageData);
-            }
-            
-            y++;
-        
-            spanLeft  = NO;
-            spanRight = NO;
-            
-            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
-            
-            color = getColorCode(byteIndex, imageData);
-            
-            while (y < height && color == ocolor)
-            {
-                imageData[byteIndex + 0] = newRed;
-                imageData[byteIndex + 1] = newGreen;
-                imageData[byteIndex + 2] = newBlue;
-                imageData[byteIndex + 3] = newAlpha;
-                
-                byteIndex = (bytesPerRow * y) + (x - 1) * bytesPerPixel;
-                
-                color = getColorCode(byteIndex, imageData);
-                
-                if(!spanLeft && x > 0 && color == ocolor)
-                {
-                    [points pushFrontX:(x - 1) andY:y];
-                 
-                    spanLeft = YES;
-                }
-                else if(spanLeft && x > 0 && color != ocolor)
-                {
-                    spanLeft = NO;
-                }
-                
-                byteIndex = (bytesPerRow * y) + (x + 1) * bytesPerPixel;
-                
-                color = getColorCode(byteIndex, imageData);
-                
-                if(!spanRight && x < width - 1 && color == ocolor)
-                {
-                    [points pushFrontX:(x + 1) andY:y];
-              
-                    spanRight = YES;
-                }
-                else if(spanRight && x < width - 1 && color != ocolor)
-                {
-                    spanRight = NO;
-                }
-                
-                y++;
-                
-                if(y < height)
-                {
-                    byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
-                 
-                    color = getColorCode(byteIndex, imageData);
-                }
-            }
-        }
-        */
-        
         //Convert Flood filled image row data back to UIImage object.
-        
-        points = Nil;
         
         UIImage *result = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
         
