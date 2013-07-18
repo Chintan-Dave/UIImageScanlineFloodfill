@@ -62,19 +62,18 @@
         unsigned int ocolor = getColorCode(byteIndex, imageData);
         
         //Convert newColor to RGBA value so we can save it to image.
-        
         int newRed, newGreen, newBlue, newAlpha;
         
         const CGFloat *components = CGColorGetComponents(newColor.CGColor);
         
         /*
-            If you are not getting why I have user CGColorGetNumberOfComponents than read following link:
+            If you are not getting why I use CGColorGetNumberOfComponents than read following link:
             http://stackoverflow.com/questions/9238743/is-there-an-issue-with-cgcolorgetcomponents
         */
         
         if(CGColorGetNumberOfComponents(newColor.CGColor) == 2)
         {
-            newRed = newGreen = newBlue = components[0] * 255;
+            newRed   = newGreen = newBlue = components[0] * 255;
             newAlpha = components[1];
         }
         else if (CGColorGetNumberOfComponents(newColor.CGColor) == 4)
@@ -85,11 +84,7 @@
             newAlpha = 255;
         }
         
-        
-        if(compareColor(ocolor, ((newRed << 24) | (newGreen << 16) | (newBlue << 8) | (newAlpha)), tolerance))
-        {
-            return self;
-        }
+        unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
         
         /*
             We are using stack to store point.
@@ -140,7 +135,7 @@
             
             color = getColorCode(byteIndex, imageData);
             
-            while (y < height && compareColor(ocolor, color, tolerance))
+            while (y < height && compareColor(ocolor, color, tolerance) && ncolor != color)
             {
                 //Change old color with newColor RGBA value
                 
@@ -158,7 +153,7 @@
                     if(!spanLeft && x > 0 && compareColor(ocolor, color, tolerance))
                     {
                         [points pushFrontX:(x - 1) andY:y];
-                        
+                    
                         spanLeft = YES;
                     }
                     else if(spanLeft && x > 0 && !compareColor(ocolor, color, tolerance))
@@ -242,7 +237,7 @@ bool compareColor (unsigned int color1, unsigned int color2, int tolorance)
 {
     if(color1 == color2)
         return true;
-        
+    
     int red1   = ((0xff000000 & color1) >> 24);
     int green1 = ((0x00ff0000 & color1) >> 16);
     int blue1  = ((0x0000ff00 & color1) >> 8);

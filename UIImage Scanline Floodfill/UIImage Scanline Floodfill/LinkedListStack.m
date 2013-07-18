@@ -52,7 +52,7 @@
 #pragma mark - Stack methods
 /*
     X and Y are converted in single integer value (P) to push in stack.
-    And again that value (P) are converted to X and Y when popby using following equation:
+    And again that value (P) are converted to X and Y when pop by using following equation:
     
     P = H * X + Y
  
@@ -113,10 +113,12 @@
 
 - (PointNode *)getNextFreeNode
 {
-    if(freeNodeOffset < 0) {
+    if(freeNodeOffset < 0)
+    {
         // Need to extend the size of the nodeCache
         int currentSize = nodeCache.length / sizeof(PointNode);
         [nodeCache increaseLengthBy:_cacheSizeIncrements * sizeof(PointNode)];
+    
         // Set these new nodes to be the free ones
         [self initialiseNodesAtOffset:currentSize count:_cacheSizeIncrements];
         freeNodeOffset = currentSize;
@@ -124,18 +126,23 @@
     
     PointNode *node = (PointNode*)nodeCache.mutableBytes + freeNodeOffset;
     freeNodeOffset = node->nextNodeOffset;
+    
     return node;
 }
 
 - (void)initialiseNodesAtOffset:(int)offset count:(int)count
 {
     PointNode *node = (PointNode *)nodeCache.mutableBytes + offset;
-    for (int i=0; i<count - 1; i++) {
+    
+    for (int i=0; i<count - 1; i++)
+    {
         node->point = 0;
         node->nextNodeOffset = offset + i + 1;
         node++;
     }
+    
     node->point = 0;
+    
     // Set the next node offset to make sure we don't continue
     node->nextNodeOffset = FINAL_NODE_OFFSET;
 }

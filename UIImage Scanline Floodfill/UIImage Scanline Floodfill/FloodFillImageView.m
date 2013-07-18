@@ -12,7 +12,7 @@
 
 @synthesize tolorance,newcolor;
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint tpoint = [[[event allTouches] anyObject] locationInView:self];
     
@@ -20,11 +20,10 @@
     tpoint.y = tpoint.y * 2 ;
     
     UIImage *image1 = [self.image floodFillFromPoint:tpoint withColor:newcolor andTolerance:tolorance];
- 
+    
     dispatch_async(dispatch_get_main_queue(), ^(void)
     {
         [self setImage:image1];
     });
 }
-
 @end

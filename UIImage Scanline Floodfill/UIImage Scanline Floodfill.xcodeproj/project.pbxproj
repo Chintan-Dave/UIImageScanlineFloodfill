@@ -14,6 +14,7 @@
 		184AEFFF1796C90300468401 /* image4.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFFB1796C90300468401 /* image4.PNG */; };
 		188052FB1797F14300503DA7 /* White.png in Resources */ = {isa = PBXBuildFile; fileRef = 188052FA1797F13500503DA7 /* White.png */; };
 		188052FD1797F95A00503DA7 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 188052FC1797F95A00503DA7 /* star.png */; };
+		188053011798268000503DA7 /* ZWT.png in Resources */ = {isa = PBXBuildFile; fileRef = 188053001798268000503DA7 /* ZWT.png */; };
 		18B5B71417952AD80060B582 /* LinkedListStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5B71317952AD80060B582 /* LinkedListStack.m */; };
 		18BB5856179441110025F8DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5855179441110025F8DB /* UIKit.framework */; };
 		18BB5858179441110025F8DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5857179441110025F8DB /* Foundation.framework */; };
@@ -39,6 +40,7 @@
 		184AEFFB1796C90300468401 /* image4.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.PNG; sourceTree = "<group>"; };
 		188052FA1797F13500503DA7 /* White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = White.png; sourceTree = "<group>"; };
 		188052FC1797F95A00503DA7 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		188053001798268000503DA7 /* ZWT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZWT.png; sourceTree = "<group>"; };
 		18B5B71217952AD80060B582 /* LinkedListStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedListStack.h; sourceTree = "<group>"; };
 		18B5B71317952AD80060B582 /* LinkedListStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedListStack.m; sourceTree = "<group>"; };
 		18BB5852179441110025F8DB /* UIImage Scanline Floodfill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIImage Scanline Floodfill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		184AEFEF1796C64000468401 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				188053001798268000503DA7 /* ZWT.png */,
 				188052FC1797F95A00503DA7 /* star.png */,
 				188052FA1797F13500503DA7 /* White.png */,
 				184AEFF81796C90300468401 /* image1.PNG */,
@@ -210,6 +213,7 @@
 			files = (
 				18BB5860179441110025F8DB /* InfoPlist.strings in Resources */,
 				18BB5868179441110025F8DB /* Default.png in Resources */,
+				188053011798268000503DA7 /* ZWT.png in Resources */,
 				184AEFFF1796C90300468401 /* image4.PNG in Resources */,
 				18BB586A179441110025F8DB /* Default@2x.png in Resources */,
 				184AEFFE1796C90300468401 /* image3.PNG in Resources */,
