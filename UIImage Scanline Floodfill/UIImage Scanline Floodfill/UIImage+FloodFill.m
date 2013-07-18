@@ -6,12 +6,9 @@
 //  Copyright (c) 2013 ZWT. All rights reserved.
 //
 
-
-
 #import "UIImage+FloodFill.h"
 
 @implementation UIImage (FloodFill)
-
 /*
     startPoint : Point from where you want to color. Generaly this is touch point.
                  This is important because color at start point will be replaced with other.
@@ -97,77 +94,80 @@
             If you are familer with flood fill than got to Scanline Floodfill Algorithm With Stack (floodFillScanlineStack)
         */
         
-        int y1;
         unsigned int color;
         BOOL spanLeft,spanRight;
         
         while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
-            y1 = y;
-            
-            byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
-            while(y1 >= 0 && compareColor(ocolor, color, tolerance))
+            while(y >= 0 && compareColor(ocolor, color, tolerance))
             {
-                y1--;
+                y--;
                 
-                byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+                byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
                 
                 color = getColorCode(byteIndex, imageData);
             }
             
-            y1++;
+            y++;
             
             spanLeft = spanRight = NO;
             
-            byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
-            while (y1 < height && compareColor(ocolor, color, tolerance))
+            while (y < height && compareColor(ocolor, color, tolerance))
             {
                 imageData[byteIndex + 0] = newRed;
                 imageData[byteIndex + 1] = newGreen;
                 imageData[byteIndex + 2] = newBlue;
                 imageData[byteIndex + 3] = newAlpha;
                 
-                byteIndex = (bytesPerRow * y1) + (x - 1) * bytesPerPixel;
-                
-                color = getColorCode(byteIndex, imageData);
-                
-                if(!spanLeft && x > 0 && compareColor(ocolor, color, tolerance))
+                if(x > 0)
                 {
-                    [points pushFrontX:(x - 1) andY:y1];
+                    byteIndex = (bytesPerRow * y) + (x - 1) * bytesPerPixel;
                     
-                    spanLeft = YES;
-                }
-                else if(spanLeft && x > 0 && !compareColor(ocolor, color, tolerance))
-                {
-                    spanLeft = NO;
-                }
-                
-                byteIndex = (bytesPerRow * y1) + (x + 1) * bytesPerPixel;
-                
-                color = getColorCode(byteIndex, imageData);
-                
-                if(!spanRight && x < width - 1 && compareColor(ocolor, color, tolerance))
-                {
-                    [points pushFrontX:(x + 1) andY:y1];
+                    color = getColorCode(byteIndex, imageData);
                     
-                    spanRight = YES;
-                }
-                else if(spanRight && x < width - 1 && !compareColor(ocolor, color, tolerance))
-                {
-                    spanRight = NO;
+                    if(!spanLeft && x > 0 && compareColor(ocolor, color, tolerance))
+                    {
+                        [points pushFrontX:(x - 1) andY:y];
+                        
+                        spanLeft = YES;
+                    }
+                    else if(spanLeft && x > 0 && !compareColor(ocolor, color, tolerance))
+                    {
+                        spanLeft = NO;
+                    }
                 }
                 
-                y1++;
-                
-                if(y1 < height)
+                if(x < width - 1)
                 {
-                    byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+                    byteIndex = (bytesPerRow * y) + (x + 1) * bytesPerPixel;
+                    
+                    color = getColorCode(byteIndex, imageData);
+                    
+                    if(!spanRight && compareColor(ocolor, color, tolerance))
+                    {
+                        [points pushFrontX:(x + 1) andY:y];
+                        
+                        spanRight = YES;
+                    }
+                    else if(spanRight && !compareColor(ocolor, color, tolerance))
+                    {
+                        spanRight = NO;
+                    }
+                }
+                
+                y++;
+                
+                if(y < height)
+                {
+                    byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
                 
                     color = getColorCode(byteIndex, imageData);
                 }
@@ -178,44 +178,44 @@
         /*
         while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
-            y1 = y;
+            y = y;
             
-            byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
-            while(y1 >= 0 && color == ocolor)
+            while(y >= 0 && color == ocolor)
             {
-                y1--;
+                y--;
                 
-                byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+                byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
         
                 color = getColorCode(byteIndex, imageData);
             }
             
-            y1++;
+            y++;
         
             spanLeft  = NO;
             spanRight = NO;
             
-            byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
-            while (y1 < height && color == ocolor)
+            while (y < height && color == ocolor)
             {
                 imageData[byteIndex + 0] = newRed;
                 imageData[byteIndex + 1] = newGreen;
                 imageData[byteIndex + 2] = newBlue;
                 imageData[byteIndex + 3] = newAlpha;
                 
-                byteIndex = (bytesPerRow * y1) + (x - 1) * bytesPerPixel;
+                byteIndex = (bytesPerRow * y) + (x - 1) * bytesPerPixel;
                 
                 color = getColorCode(byteIndex, imageData);
                 
                 if(!spanLeft && x > 0 && color == ocolor)
                 {
-                    [points pushFrontX:(x - 1) andY:y1];
+                    [points pushFrontX:(x - 1) andY:y];
                  
                     spanLeft = YES;
                 }
@@ -224,13 +224,13 @@
                     spanLeft = NO;
                 }
                 
-                byteIndex = (bytesPerRow * y1) + (x + 1) * bytesPerPixel;
+                byteIndex = (bytesPerRow * y) + (x + 1) * bytesPerPixel;
                 
                 color = getColorCode(byteIndex, imageData);
                 
                 if(!spanRight && x < width - 1 && color == ocolor)
                 {
-                    [points pushFrontX:(x + 1) andY:y1];
+                    [points pushFrontX:(x + 1) andY:y];
               
                     spanRight = YES;
                 }
@@ -239,11 +239,11 @@
                     spanRight = NO;
                 }
                 
-                y1++;
+                y++;
                 
-                if(y1 < height)
+                if(y < height)
                 {
-                    byteIndex = (bytesPerRow * y1) + x * bytesPerPixel;
+                    byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
                  
                     color = getColorCode(byteIndex, imageData);
                 }

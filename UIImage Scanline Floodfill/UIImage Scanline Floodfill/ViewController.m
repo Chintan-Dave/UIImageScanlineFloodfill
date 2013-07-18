@@ -32,6 +32,6 @@
 {
     [txtTolerance resignFirstResponder];
     imageView.tolorance = [txtTolerance.text intValue];
-    [imageView setImage:[UIImage imageNamed:@"image1.PNG"]];
+    [imageView setImage:[UIImage imageNamed:@"white.png"]];
 }
 @end

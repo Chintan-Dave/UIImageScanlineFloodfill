@@ -12,6 +12,7 @@
 		184AEFFD1796C90300468401 /* image2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFF91796C90300468401 /* image2.PNG */; };
 		184AEFFE1796C90300468401 /* image3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFFA1796C90300468401 /* image3.PNG */; };
 		184AEFFF1796C90300468401 /* image4.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 184AEFFB1796C90300468401 /* image4.PNG */; };
+		188052FB1797F14300503DA7 /* White.png in Resources */ = {isa = PBXBuildFile; fileRef = 188052FA1797F13500503DA7 /* White.png */; };
 		18B5B71417952AD80060B582 /* LinkedListStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5B71317952AD80060B582 /* LinkedListStack.m */; };
 		18BB5856179441110025F8DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5855179441110025F8DB /* UIKit.framework */; };
 		18BB5858179441110025F8DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BB5857179441110025F8DB /* Foundation.framework */; };
@@ -35,6 +36,7 @@
 		184AEFF91796C90300468401 /* image2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.PNG; sourceTree = "<group>"; };
 		184AEFFA1796C90300468401 /* image3.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.PNG; sourceTree = "<group>"; };
 		184AEFFB1796C90300468401 /* image4.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.PNG; sourceTree = "<group>"; };
+		188052FA1797F13500503DA7 /* White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = White.png; sourceTree = "<group>"; };
 		18B5B71217952AD80060B582 /* LinkedListStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedListStack.h; sourceTree = "<group>"; };
 		18B5B71317952AD80060B582 /* LinkedListStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedListStack.m; sourceTree = "<group>"; };
 		18BB5852179441110025F8DB /* UIImage Scanline Floodfill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIImage Scanline Floodfill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 		184AEFEF1796C64000468401 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				188052FA1797F13500503DA7 /* White.png */,
 				184AEFF81796C90300468401 /* image1.PNG */,
 				184AEFF91796C90300468401 /* image2.PNG */,
 				184AEFFA1796C90300468401 /* image3.PNG */,
@@ -174,6 +177,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = ZWT;
+				TargetAttributes = {
+					18BB5851179441110025F8DB = {
+						DevelopmentTeam = 2B38LY5NSL;
+					};
+				};
 			};
 			buildConfigurationList = 18BB584D179441110025F8DB /* Build configuration list for PBXProject "UIImage Scanline Floodfill" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -204,6 +212,7 @@
 				184AEFFE1796C90300468401 /* image3.PNG in Resources */,
 				18BB586C179441110025F8DB /* Default-568h@2x.png in Resources */,
 				18BB586F179441110025F8DB /* MainStoryboard.storyboard in Resources */,
+				188052FB1797F14300503DA7 /* White.png in Resources */,
 				184AEFFD1796C90300468401 /* image2.PNG in Resources */,
 				184AEFFC1796C90300468401 /* image1.PNG in Resources */,
 			);
@@ -272,7 +281,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -296,7 +305,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -306,6 +315,7 @@
 		18BB5876179441110025F8DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Prefix.pch";
 				INFOPLIST_FILE = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Info.plist";
@@ -318,6 +328,7 @@
 		18BB5877179441110025F8DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Prefix.pch";
 				INFOPLIST_FILE = "UIImage Scanline Floodfill/UIImage Scanline Floodfill-Info.plist";
