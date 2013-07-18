@@ -8,7 +8,7 @@
 		<h3>
 			This is an Objective-C implementation of Scanline Flood Fill Algorithm.</h3>
 		<div style="margin-left: 40px;">
-			<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0126.PNG" style="width: 320px; height: 568px;" />&nbsp; &nbsp; &nbsp;&nbsp;<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0127.PNG" style="width: 320px; height: 568px;" /></div>
+			<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0126.PNG" style="max-width: 45%;" />&nbsp; &nbsp; &nbsp;&nbsp;<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0127.PNG" style="max-width: 45%;" /></div>
 		<div style="margin-left: 40px;">
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Before use Flood Fill &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; After Using Flood Fill</div>
 		<div style="margin-left: 40px;">
