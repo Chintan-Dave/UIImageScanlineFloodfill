@@ -44,6 +44,10 @@
 				<a href="http://lodev.org/cgtutor/floodfill.html">Lode&#39;s Computer Graphics Tutorial Flood Fill</a></li>
 		</ul>
 		<h3>
+			<u>How It Work ?</u></h3>
+		<p>
+			For Implementation detail visit :&nbsp;<a href="http://ilearnios.wordpress.com/2013/07/18/scanline-flood-fill-algorithm-with-or-without-tolerance-in-objective-c/"><span style="font-size:14px;"><samp><tt><span style="color: rgb(25, 25, 25); font-family: Lato, sans-serif;">Scanline </span></tt></samp><tt><span style="color: rgb(25, 25, 25); font-family: Lato, sans-serif;">Flood</span></tt><samp><tt><span style="color: rgb(25, 25, 25); font-family: Lato, sans-serif;"> Fill Algorithm with (or without) Tolerance in&nbsp;Objective-C</span></tt></samp></span></a></p>
+		<h3>
 			<u><strong>How To Use It:</strong></u></h3>
 		<p>
 			If you wan to use this directly in your project that do as follow:</p>
