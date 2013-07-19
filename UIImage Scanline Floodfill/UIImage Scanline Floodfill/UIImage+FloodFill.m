@@ -138,7 +138,6 @@
             while (y < height && compareColor(ocolor, color, tolerance) && ncolor != color)
             {
                 //Change old color with newColor RGBA value
-                
                 imageData[byteIndex + 0] = newRed;
                 imageData[byteIndex + 1] = newGreen;
                 imageData[byteIndex + 2] = newBlue;
@@ -212,7 +211,6 @@
     This two function are called most of time so it require that calling this work in speed.
     I have not verified this performance so I like to here comment on this.
 */
-
 /*
     This function extract color from image and convert it to integer represent.
  
