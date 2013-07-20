@@ -192,7 +192,11 @@
         
         //Convert Flood filled image row data back to UIImage object.
         
-        UIImage *result = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
+        CGImageRef newCGImage = CGBitmapContextCreateImage(context);
+        
+        UIImage *result = [UIImage imageWithCGImage:newCGImage];
+        
+        CGImageRelease(newCGImage);
         
         CGContextRelease(context);
     
