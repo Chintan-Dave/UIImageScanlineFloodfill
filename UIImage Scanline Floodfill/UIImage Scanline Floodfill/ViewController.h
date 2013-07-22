@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIImage+FloodFill.h"
 #import "FloodFillImageView.h"
-#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController : UIViewController
 
