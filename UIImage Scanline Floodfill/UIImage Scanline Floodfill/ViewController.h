@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) IBOutlet FloodFillImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *txtTolerance;
+@property (strong, nonatomic) IBOutlet UITextField *txtAlpha;
 
 - (IBAction)btnSetTap:(UIButton *)sender;
 

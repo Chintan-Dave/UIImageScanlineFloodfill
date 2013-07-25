@@ -11,5 +11,6 @@
 
 @interface FloodFillImageView : UIImageView
 @property int tolorance;
+@property int newAlpha;
 @property (strong, nonatomic)  UIColor *newcolor;
 @end

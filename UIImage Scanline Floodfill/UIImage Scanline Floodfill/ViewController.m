@@ -14,7 +14,7 @@
 
 @implementation ViewController
 
-@synthesize txtTolerance;
+@synthesize txtTolerance,txtAlpha;
 @synthesize imageView;
 
 - (void)viewDidLoad
@@ -33,8 +33,12 @@
 - (IBAction)btnSetTap:(UIButton *)sender
 {
     [txtTolerance resignFirstResponder];
+    [txtAlpha resignFirstResponder];
+    
     imageView.tolorance = [txtTolerance.text intValue];
-    [imageView setImage:[UIImage imageNamed:@"star.png"]];
+    imageView.newAlpha = [txtAlpha.text integerValue];
+    
+    [imageView setImage:[UIImage imageNamed:@"image3.PNG"]];
 }
 
 - (IBAction)btnColorTap:(UIButton *)sender
