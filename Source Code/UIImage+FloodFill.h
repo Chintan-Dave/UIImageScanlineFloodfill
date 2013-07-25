@@ -11,6 +11,9 @@
 
 @interface UIImage (FloodFill)
 
-- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint
+                       withColor:(UIColor *)newColor
+                    andTolerance:(int)tolerance
+                        andAlpha:(int)alpha;
 
 @end

@@ -21,7 +21,10 @@
                  If You dont want to use tolerance and want to incress performance Than you can change
                  compareColor(ocolor, color, tolerance) with just ocolor==color which reduse function call.
 */
-- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint
+                       withColor:(UIColor *)newColor
+                    andTolerance:(int)tolerance
+                        andAlpha:(int)alpha
 {
     @try
     {
@@ -81,7 +84,7 @@
             newRed   = components[0] * 255;
             newGreen = components[1] * 255;
             newBlue  = components[2] * 255;
-            newAlpha = 255;
+            newAlpha = components[3] ;
         }
         
         unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
@@ -96,8 +99,8 @@
         
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
-        int x = startPoint.x;
-        int y = startPoint.y;
+        int x = startPoint.x - 1;
+        int y = startPoint.y - 1;
         
         [points pushFrontX:x andY:y];
         
@@ -132,6 +135,12 @@
             
             y++;
             
+            //Check if y reach at the end than no need to go further
+            if(y >= width)
+            {
+                continue;
+            }
+            
             spanLeft = spanRight = NO;
             
             byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
@@ -140,10 +149,32 @@
             
             while (y < height && compareColor(ocolor, color, tolerance) && ncolor != color)
             {
+                //Calculate color new color with alpha for current byteIndex
+                unsigned char fillnewRed   = (alpha * newRed   + (255 - alpha + 1) * imageData[byteIndex + 0]) >> 8;
+                unsigned char fillnewGreen = (alpha * newGreen + (255 - alpha + 1) * imageData[byteIndex + 1]) >> 8;
+                unsigned char fillnewBlue  = (alpha * newBlue  + (255 - alpha + 1) * imageData[byteIndex + 2]) >> 8;
+                
+                unsigned int newcolor = (fillnewRed << 24) | (fillnewGreen << 16) | (fillnewBlue << 8) | newAlpha;
+                
+                //If current color of pixle is filled with new color than dont go further
+                if(newcolor == color)
+                {
+                    y++;
+                    
+                    if(y < height)
+                    {
+                        byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+                        
+                        color = getColorCode(byteIndex, imageData);
+                    }
+                    
+                    continue;
+                }
+                
                 //Change old color with newColor RGBA value
-                imageData[byteIndex + 0] = newRed;
-                imageData[byteIndex + 1] = newGreen;
-                imageData[byteIndex + 2] = newBlue;
+                imageData[byteIndex + 0] = fillnewRed;
+                imageData[byteIndex + 1] = fillnewGreen;
+                imageData[byteIndex + 2] = fillnewBlue;
                 imageData[byteIndex + 3] = newAlpha;
                 
                 if(x > 0)
