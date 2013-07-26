@@ -38,7 +38,7 @@
     imageView.tolorance = [txtTolerance.text intValue];
     imageView.newAlpha = [txtAlpha.text integerValue];
     
-    [imageView setImage:[UIImage imageNamed:@"image3.PNG"]];
+    [imageView setImage:[UIImage imageNamed:@"image2.PNG"]];
 }
 
 - (IBAction)btnColorTap:(UIButton *)sender
