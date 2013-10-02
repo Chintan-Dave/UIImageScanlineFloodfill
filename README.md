@@ -6,7 +6,7 @@
 		<h1>
 			<u><strong>UIImageScanlineFloodfill</strong></u></h1>
 		<h3>
-			This is an Objective-C implementation of Scanline Flood Fill Algorithm.</h3>
+			This is an <a href="http://ilearnios.wordpress.com/2013/07/18/scanline-flood-fill-algorithm-with-or-without-tolerance-in-objective-c/" target="_blank">Objective-C implementation of Scanline Flood Fill Algorithm.</a></h3>
 		<div style="margin-left: 40px;">
 			<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0126.PNG" style="max-width: 45%;" />&nbsp; &nbsp; &nbsp;&nbsp;<img alt="" src="https://raw.github.com/Chintan-Dave/UIImageScanlineFloodfill/master/Images/IMG_0127.PNG" style="max-width: 45%;" /></div>
 		<div style="margin-left: 40px;">
