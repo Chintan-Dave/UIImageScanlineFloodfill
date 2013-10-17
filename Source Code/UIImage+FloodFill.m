@@ -197,7 +197,7 @@
         
         CGImageRef newCGImage = CGBitmapContextCreateImage(context);
         
-        UIImage *result = [UIImage imageWithCGImage:newCGImage];
+        UIImage *result = [UIImage imageWithCGImage:newCGImage scale:[self scale] orientation:UIImageOrientationUp];
         
         CGImageRelease(newCGImage);
         
