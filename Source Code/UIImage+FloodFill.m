@@ -8,6 +8,8 @@
 
 #import "UIImage+FloodFill.h"
 
+#define DEBUG_ANTIALIASING 0
+
 @implementation UIImage (FloodFill)
 /*
     startPoint : Point from where you want to color. Generaly this is touch point.
@@ -21,7 +23,7 @@
                  If You dont want to use tolerance and want to incress performance Than you can change
                  compareColor(ocolor, color, tolerance) with just ocolor==color which reduse function call.
 */
-- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance;
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance
 {
     @try
     {
@@ -44,6 +46,8 @@
         NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(imageRef) / 8;
         NSUInteger bytesPerRow = CGImageGetBytesPerRow(imageRef);
         NSUInteger bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+        
+        CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
         
         CGContextRef context = CGBitmapContextCreate(imageData,
                                                      width,
@@ -74,14 +78,24 @@
         if(CGColorGetNumberOfComponents(newColor.CGColor) == 2)
         {
             newRed   = newGreen = newBlue = components[0] * 255;
-            newAlpha = components[1];
+            newAlpha = components[1] * 255;
         }
         else if (CGColorGetNumberOfComponents(newColor.CGColor) == 4)
         {
-            newRed   = components[0] * 255;
-            newGreen = components[1] * 255;
-            newBlue  = components[2] * 255;
-            newAlpha = 255;
+            if ((bitmapInfo&kCGBitmapByteOrderMask) == kCGBitmapByteOrder32Little)
+            {
+                newRed   = components[2] * 255;
+                newGreen = components[1] * 255;
+                newBlue  = components[0] * 255;
+                newAlpha = 255;
+            }
+            else
+            {
+                newRed   = components[0] * 255;
+                newGreen = components[1] * 255;
+                newBlue  = components[2] * 255;
+                newAlpha = 255;
+            }
         }
         
         unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
@@ -95,6 +109,7 @@
         */
         
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
+        LinkedListStack *antiAliasingPoints = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
         int x = startPoint.x;
         int y = startPoint.y;
@@ -130,6 +145,12 @@
                 }
             }
             
+            // Add the top most point on the antialiasing list
+            if(y >= 0 && !compareColor(ocolor, color, 0))
+            {
+                [antiAliasingPoints pushFrontX:x andY:y];
+            }
+            
             y++;
             
             spanLeft = spanRight = NO;
@@ -162,6 +183,13 @@
                     {
                         spanLeft = NO;
                     }
+                    
+                    // we can't go left. Add the point on the antialiasing list
+                    if(!spanLeft && x > 0 && !compareColor(ocolor, color, tolerance) && !compareColor(ncolor, color, tolerance))
+                    {
+                        [antiAliasingPoints pushFrontX:(x - 1) andY:y];
+                    }
+
                 }
                 
                 if(x < width - 1)
@@ -180,6 +208,13 @@
                     {
                         spanRight = NO;
                     }
+                    
+                    // we can't go right. Add the point on the antialiasing list
+                    if(!spanRight && !compareColor(ocolor, color, tolerance) && !compareColor(ncolor, color, tolerance))
+                    {
+                        [antiAliasingPoints pushFrontX:(x + 1) andY:y];
+                    }
+
                 }
                 
                 y++;
@@ -190,6 +225,155 @@
                 
                     color = getColorCode(byteIndex, imageData);
                 }
+            }
+            
+            if (y<height)
+            {
+                byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+                color = getColorCode(byteIndex, imageData);
+                
+                // Add the bottom point on the antialiasing list
+                if (!compareColor(ocolor, color, 0))
+                    [antiAliasingPoints pushFrontX:x andY:y];
+            }
+        }
+        
+        // For each point marked
+        // perform antialiasing on the same pixel, plus the top,left,bottom and right pixel
+        unsigned int antialiasColor = getColorCodeFromUIColor(newColor,bitmapInfo&kCGBitmapByteOrderMask );
+        int red1   = ((0xff000000 & antialiasColor) >> 24);
+        int green1 = ((0x00ff0000 & antialiasColor) >> 16);
+        int blue1  = ((0x0000ff00 & antialiasColor) >> 8);
+        int alpha1 =  (0x000000ff & antialiasColor);
+
+        while ([antiAliasingPoints popFront:&x andY:&y] != INVALID_NODE_CONTENT)
+        {
+            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+            color = getColorCode(byteIndex, imageData);
+
+            if (!compareColor(ncolor, color, 0))
+            {
+                int red2   = ((0xff000000 & color) >> 24);
+                int green2 = ((0x00ff0000 & color) >> 16);
+                int blue2 = ((0x0000ff00 & color) >> 8);
+                int alpha2 =  (0x000000ff & color);
+
+                imageData[byteIndex + 0] = (red1+red2) / 2;
+                imageData[byteIndex + 1] = (green1 + green2) / 2;
+                imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                
+#if DEBUG_ANTIALIASING
+                imageData[byteIndex + 0] = 0;
+                imageData[byteIndex + 1] = 0;
+                imageData[byteIndex + 2] = 255;
+                imageData[byteIndex + 3] = 255;
+#endif
+            }
+            
+            // left
+            if (x>0)
+            {
+                byteIndex = (bytesPerRow * y) + (x-1) * bytesPerPixel;
+                color = getColorCode(byteIndex, imageData);
+                
+                if (!compareColor(ncolor, color, 0))
+                {
+                    int red2   = ((0xff000000 & color) >> 24);
+                    int green2 = ((0x00ff0000 & color) >> 16);
+                    int blue2 = ((0x0000ff00 & color) >> 8);
+                    int alpha2 =  (0x000000ff & color);
+                    
+                    imageData[byteIndex + 0] = (red1+red2) / 2;
+                    imageData[byteIndex + 1] = (green1 + green2) / 2;
+                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    
+#if DEBUG_ANTIALIASING
+                    imageData[byteIndex + 0] = 0;
+                    imageData[byteIndex + 1] = 0;
+                    imageData[byteIndex + 2] = 255;
+                    imageData[byteIndex + 3] = 255;
+#endif
+                }
+            }
+            if (x<width)
+            {
+                byteIndex = (bytesPerRow * y) + (x+1) * bytesPerPixel;
+                color = getColorCode(byteIndex, imageData);
+                
+                if (!compareColor(ncolor, color, 0))
+                {
+                    int red2   = ((0xff000000 & color) >> 24);
+                    int green2 = ((0x00ff0000 & color) >> 16);
+                    int blue2 = ((0x0000ff00 & color) >> 8);
+                    int alpha2 =  (0x000000ff & color);
+                    
+                    imageData[byteIndex + 0] = (red1+red2) / 2;
+                    imageData[byteIndex + 1] = (green1 + green2) / 2;
+                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+
+#if DEBUG_ANTIALIASING
+                    imageData[byteIndex + 0] = 0;
+                    imageData[byteIndex + 1] = 0;
+                    imageData[byteIndex + 2] = 255;
+                    imageData[byteIndex + 3] = 255;
+#endif
+                }
+
+            }
+            
+            if (y>0)
+            {
+                byteIndex = (bytesPerRow * (y-1)) + x * bytesPerPixel;
+                color = getColorCode(byteIndex, imageData);
+                
+                if (!compareColor(ncolor, color, 0))
+                {
+                    int red2   = ((0xff000000 & color) >> 24);
+                    int green2 = ((0x00ff0000 & color) >> 16);
+                    int blue2 = ((0x0000ff00 & color) >> 8);
+                    int alpha2 =  (0x000000ff & color);
+                    
+                    imageData[byteIndex + 0] = (red1+red2) / 2;
+                    imageData[byteIndex + 1] = (green1 + green2) / 2;
+                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+#if DEBUG_ANTIALIASING
+                    imageData[byteIndex + 0] = 0;
+                    imageData[byteIndex + 1] = 0;
+                    imageData[byteIndex + 2] = 255;
+                    imageData[byteIndex + 3] = 255;
+#endif
+                }
+            }
+            
+            if (y<height)
+            {
+                byteIndex = (bytesPerRow * (y+1)) + x * bytesPerPixel;
+                color = getColorCode(byteIndex, imageData);
+                
+                if (!compareColor(ncolor, color, 0))
+                {
+                    int red2   = ((0xff000000 & color) >> 24);
+                    int green2 = ((0x00ff0000 & color) >> 16);
+                    int blue2 = ((0x0000ff00 & color) >> 8);
+                    int alpha2 =  (0x000000ff & color);
+                    
+                    imageData[byteIndex + 0] = (red1+red2) / 2;
+                    imageData[byteIndex + 1] = (green1 + green2) / 2;
+                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    
+#if DEBUG_ANTIALIASING
+                    imageData[byteIndex + 0] = 0;
+                    imageData[byteIndex + 1] = 0;
+                    imageData[byteIndex + 2] = 255;
+                    imageData[byteIndex + 3] = 255;
+#endif
+                }
+
             }
         }
         
@@ -268,4 +452,50 @@ bool compareColor (unsigned int color1, unsigned int color2, int tolorance)
     
     return true;
 }
+
+unsigned int getColorCodeFromUIColor(UIColor *color, CGBitmapInfo orderMask)
+{
+    //Convert newColor to RGBA value so we can save it to image.
+    int newRed, newGreen, newBlue, newAlpha;
+    
+    const CGFloat *components = CGColorGetComponents(color.CGColor);
+    
+    /*
+     If you are not getting why I use CGColorGetNumberOfComponents than read following link:
+     http://stackoverflow.com/questions/9238743/is-there-an-issue-with-cgcolorgetcomponents
+     */
+    
+    if(CGColorGetNumberOfComponents(color.CGColor) == 2)
+    {
+        newRed   = newGreen = newBlue = components[0] * 255;
+        newAlpha = components[1] * 255;
+    }
+    else if (CGColorGetNumberOfComponents(color.CGColor) == 4)
+    {
+        if (orderMask == kCGBitmapByteOrder32Little)
+        {
+            newRed   = components[2] * 255;
+            newGreen = components[1] * 255;
+            newBlue  = components[0] * 255;
+            newAlpha = 255;
+        }
+        else
+        {
+            newRed   = components[0] * 255;
+            newGreen = components[1] * 255;
+            newBlue  = components[2] * 255;
+            newAlpha = 255;
+        }
+    }
+    else
+    {
+        newRed   = newGreen = newBlue = 0;
+        newAlpha = 255;
+    }
+    
+    unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
+
+    return ncolor;
+}
+
 @end
