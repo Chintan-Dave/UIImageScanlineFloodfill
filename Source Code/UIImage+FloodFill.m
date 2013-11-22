@@ -272,9 +272,9 @@
             }
             
             // left
-            if (x>0)
+            if (x>1 && y>0)
             {
-                byteIndex = (bytesPerRow * y) + (x-1) * bytesPerPixel;
+                byteIndex = bytesPerRow * (y-1) + (x-1) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -297,9 +297,9 @@
 #endif
                 }
             }
-            if (x<width)
+            if (x<width && y>0)
             {
-                byteIndex = (bytesPerRow * y) + (x+1) * bytesPerPixel;
+                byteIndex = bytesPerRow * (y-1) + (x+1) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -324,9 +324,9 @@
 
             }
             
-            if (y>0)
+            if (y>1)
             {
-                byteIndex = (bytesPerRow * (y-1)) + x * bytesPerPixel;
+                byteIndex = bytesPerRow * (y-2) + x * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -351,7 +351,7 @@
             
             if (y<height)
             {
-                byteIndex = (bytesPerRow * (y+1)) + x * bytesPerPixel;
+                byteIndex = bytesPerRow * y + x * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
