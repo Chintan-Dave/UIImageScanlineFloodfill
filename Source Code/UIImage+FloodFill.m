@@ -41,11 +41,11 @@
         NSUInteger width = CGImageGetWidth(imageRef);
         NSUInteger height = CGImageGetHeight(imageRef);
         
-        unsigned char *imageData = malloc(height * width * 4);
-        
         NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(imageRef) / 8;
         NSUInteger bytesPerRow = CGImageGetBytesPerRow(imageRef);
         NSUInteger bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+        
+        unsigned char *imageData = malloc(bytesPerRow * height);
         
         CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
         
