@@ -120,8 +120,8 @@
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         LinkedListStack *antiAliasingPoints = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
-        int x = startPoint.x;
-        int y = startPoint.y;
+        int x = roundf(startPoint.x);
+        int y = roundf(startPoint.y);
         
         [points pushFrontX:x andY:y];
         
