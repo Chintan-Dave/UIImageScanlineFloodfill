@@ -25,6 +25,11 @@
 */
 - (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance
 {
+    return [self floodFillFromPoint:startPoint withColor:newColor andTolerance:tolerance useAntiAlias:YES];
+}
+
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance useAntiAlias:(BOOL)antiAlias
+{
     @try
     {
         /*
@@ -61,9 +66,13 @@
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
         //Get color at start point
-        unsigned int byteIndex = (bytesPerRow * startPoint.y) + startPoint.x * bytesPerPixel;
+		unsigned int byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
         
         unsigned int ocolor = getColorCode(byteIndex, imageData);
+        
+        if (compareColor(ocolor, 0, 0)) {
+            return nil;
+        }
         
         //Convert newColor to RGBA value so we can save it to image.
         int newRed, newGreen, newBlue, newAlpha;
@@ -111,8 +120,8 @@
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         LinkedListStack *antiAliasingPoints = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
-        int x = startPoint.x;
-        int y = startPoint.y;
+        int x = roundf(startPoint.x);
+        int y = roundf(startPoint.y);
         
         [points pushFrontX:x andY:y];
         
@@ -258,10 +267,17 @@
                 int blue2 = ((0x0000ff00 & color) >> 8);
                 int alpha2 =  (0x000000ff & color);
 
-                imageData[byteIndex + 0] = (red1+red2) / 2;
-                imageData[byteIndex + 1] = (green1 + green2) / 2;
-                imageData[byteIndex + 2] = (blue1 + blue2) / 2;
-                imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                if (antiAlias) {
+                    imageData[byteIndex + 0] = (red1 + red2) / 2;
+                    imageData[byteIndex + 1] = (green1 + green2) / 2;
+                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                    imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
+                } else {
+                    imageData[byteIndex + 0] = red2;
+                    imageData[byteIndex + 1] = green2;
+                    imageData[byteIndex + 2] = blue2;
+                    imageData[byteIndex + 3] = alpha2;
+                }
                 
 #if DEBUG_ANTIALIASING
                 imageData[byteIndex + 0] = 0;
@@ -284,10 +300,17 @@
                     int blue2 = ((0x0000ff00 & color) >> 8);
                     int alpha2 =  (0x000000ff & color);
                     
-                    imageData[byteIndex + 0] = (red1+red2) / 2;
-                    imageData[byteIndex + 1] = (green1 + green2) / 2;
-                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
-                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    if (antiAlias) {
+                        imageData[byteIndex + 0] = (red1 + red2) / 2;
+                        imageData[byteIndex + 1] = (green1 + green2) / 2;
+                        imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                        imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
+                    } else {
+                        imageData[byteIndex + 0] = red2;
+                        imageData[byteIndex + 1] = green2;
+                        imageData[byteIndex + 2] = blue2;
+                        imageData[byteIndex + 3] = alpha2;
+                    }
                     
 #if DEBUG_ANTIALIASING
                     imageData[byteIndex + 0] = 0;
@@ -309,10 +332,17 @@
                     int blue2 = ((0x0000ff00 & color) >> 8);
                     int alpha2 =  (0x000000ff & color);
                     
-                    imageData[byteIndex + 0] = (red1+red2) / 2;
-                    imageData[byteIndex + 1] = (green1 + green2) / 2;
-                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
-                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    if (antiAlias) {
+                        imageData[byteIndex + 0] = (red1 + red2) / 2;
+                        imageData[byteIndex + 1] = (green1 + green2) / 2;
+                        imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                        imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
+                    } else {
+                        imageData[byteIndex + 0] = red2;
+                        imageData[byteIndex + 1] = green2;
+                        imageData[byteIndex + 2] = blue2;
+                        imageData[byteIndex + 3] = alpha2;
+                    }
 
 #if DEBUG_ANTIALIASING
                     imageData[byteIndex + 0] = 0;
@@ -336,10 +366,18 @@
                     int blue2 = ((0x0000ff00 & color) >> 8);
                     int alpha2 =  (0x000000ff & color);
                     
-                    imageData[byteIndex + 0] = (red1+red2) / 2;
-                    imageData[byteIndex + 1] = (green1 + green2) / 2;
-                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
-                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    if (antiAlias) {
+                        imageData[byteIndex + 0] = (red1 + red2) / 2;
+                        imageData[byteIndex + 1] = (green1 + green2) / 2;
+                        imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                        imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
+                    } else {
+                        imageData[byteIndex + 0] = red2;
+                        imageData[byteIndex + 1] = green2;
+                        imageData[byteIndex + 2] = blue2;
+                        imageData[byteIndex + 3] = alpha2;
+                    }
+                    
 #if DEBUG_ANTIALIASING
                     imageData[byteIndex + 0] = 0;
                     imageData[byteIndex + 1] = 0;
@@ -361,10 +399,17 @@
                     int blue2 = ((0x0000ff00 & color) >> 8);
                     int alpha2 =  (0x000000ff & color);
                     
-                    imageData[byteIndex + 0] = (red1+red2) / 2;
-                    imageData[byteIndex + 1] = (green1 + green2) / 2;
-                    imageData[byteIndex + 2] = (blue1 + blue2) / 2;
-                    imageData[byteIndex + 3] = (alpha1 + alpha2) /2;
+                    if (antiAlias) {
+                        imageData[byteIndex + 0] = (red1 + red2) / 2;
+                        imageData[byteIndex + 1] = (green1 + green2) / 2;
+                        imageData[byteIndex + 2] = (blue1 + blue2) / 2;
+                        imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
+                    } else {
+                        imageData[byteIndex + 0] = red2;
+                        imageData[byteIndex + 1] = green2;
+                        imageData[byteIndex + 2] = blue2;
+                        imageData[byteIndex + 3] = alpha2;
+                    }
                     
 #if DEBUG_ANTIALIASING
                     imageData[byteIndex + 0] = 0;
