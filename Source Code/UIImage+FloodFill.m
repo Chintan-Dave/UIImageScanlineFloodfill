@@ -61,7 +61,7 @@
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
         //Get color at start point
-        unsigned int byteIndex = (bytesPerRow * startPoint.y) + startPoint.x * bytesPerPixel;
+        unsigned int byteIndex = (bytesPerRow * ((int)startPoint.y)) + ((int)startPoint.x) * bytesPerPixel;
         
         unsigned int ocolor = getColorCode(byteIndex, imageData);
         
