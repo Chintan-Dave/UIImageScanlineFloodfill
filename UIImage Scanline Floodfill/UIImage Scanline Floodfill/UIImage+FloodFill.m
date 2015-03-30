@@ -53,6 +53,9 @@
         NSUInteger bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
         
         CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+        if (kCGImageAlphaLast == (uint32_t)bitmapInfo || kCGImageAlphaFirst == (uint32_t)bitmapInfo) {
+            bitmapInfo = (uint32_t)kCGImageAlphaPremultipliedLast;
+        }
         
         CGContextRef context = CGBitmapContextCreate(imageData,
                                                      width,
@@ -60,7 +63,7 @@
                                                      bitsPerComponent,
                                                      bytesPerRow,
                                                      colorSpace,
-                                                     CGImageGetBitmapInfo(imageRef));
+                                                     bitmapInfo);
         CGColorSpaceRelease(colorSpace);
         
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
