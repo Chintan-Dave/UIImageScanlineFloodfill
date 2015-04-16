@@ -2,35 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B53208F3-9221-4EFD-9FF6-620623A69F15</string>
 	<key>IDESourceControlProjectName</key>
 	<string>UIImage Scanline Floodfill</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4B105F7C-849F-495F-A30A-444C392806A5</key>
+		<key>0D65F0B0C9EA53F9883B3B7E19A2B0FCDC4A6BE0</key>
 		<string>https://github.com/chinatndave/UIImageScanlineFloodfill.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UIImage Scanline Floodfill/UIImage Scanline Floodfill.xcodeproj/project.xcworkspace</string>
+	<string>UIImage Scanline Floodfill/UIImage Scanline Floodfill.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4B105F7C-849F-495F-A30A-444C392806A5</key>
+		<key>0D65F0B0C9EA53F9883B3B7E19A2B0FCDC4A6BE0</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/chinatndave/UIImageScanlineFloodfill.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4B105F7C-849F-495F-A30A-444C392806A5</string>
+	<string>0D65F0B0C9EA53F9883B3B7E19A2B0FCDC4A6BE0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4B105F7C-849F-495F-A30A-444C392806A5</string>
+			<string>0D65F0B0C9EA53F9883B3B7E19A2B0FCDC4A6BE0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>UIImageScanlineFloodfill</string>
 		</dict>

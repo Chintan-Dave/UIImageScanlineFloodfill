@@ -22,6 +22,8 @@
     [super viewDidLoad];
     
     imageView.newcolor = [UIColor redColor];
+    imageView.tolorance = [txtTolerance.text intValue];
+    imageView.newAlpha = [txtAlpha.text integerValue];
 }
 
 - (void)didReceiveMemoryWarning

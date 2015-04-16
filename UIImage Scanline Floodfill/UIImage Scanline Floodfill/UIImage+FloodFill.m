@@ -54,7 +54,7 @@
                                                      bitsPerComponent,
                                                      bytesPerRow,
                                                      colorSpace,
-                                                     CGImageGetBitmapInfo(imageRef));
+                                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
         CGColorSpaceRelease(colorSpace);
         
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
@@ -84,7 +84,7 @@
             newRed   = components[0] * 255;
             newGreen = components[1] * 255;
             newBlue  = components[2] * 255;
-            newAlpha = components[3] ;
+            newAlpha = 0xff;
         }
         
         unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
