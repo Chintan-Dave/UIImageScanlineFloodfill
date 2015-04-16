@@ -68,7 +68,7 @@
         
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
-        //Get color at start point
+        //Get color at start point 
 		unsigned int byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
         
         unsigned int ocolor = getColorCode(byteIndex, imageData);
@@ -141,7 +141,7 @@
         
         while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
-            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
@@ -151,7 +151,7 @@
                 
                 if(y >= 0)
                 {
-                    byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+                    byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
                 
                     color = getColorCode(byteIndex, imageData);
                 }
@@ -167,7 +167,7 @@
             
             spanLeft = spanRight = NO;
             
-            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
             
             color = getColorCode(byteIndex, imageData);
             
@@ -181,7 +181,7 @@
                 
                 if(x > 0)
                 {
-                    byteIndex = (bytesPerRow * y) + (x - 1) * bytesPerPixel;
+                    byteIndex = (bytesPerRow * roundf(y)) + roundf(x - 1) * bytesPerPixel;
                     
                     color = getColorCode(byteIndex, imageData);
                     
@@ -201,12 +201,11 @@
                     {
                         [antiAliasingPoints pushFrontX:(x - 1) andY:y];
                     }
-
                 }
                 
                 if(x < width - 1)
                 {
-                    byteIndex = (bytesPerRow * y) + (x + 1) * bytesPerPixel;
+                    byteIndex = (bytesPerRow * roundf(y)) + roundf(x + 1) * bytesPerPixel;;
                     
                     color = getColorCode(byteIndex, imageData);
                     
@@ -226,14 +225,13 @@
                     {
                         [antiAliasingPoints pushFrontX:(x + 1) andY:y];
                     }
-
                 }
                 
                 y++;
                 
                 if(y < height)
                 {
-                    byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+                    byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
                 
                     color = getColorCode(byteIndex, imageData);
                 }
@@ -241,7 +239,7 @@
             
             if (y<height)
             {
-                byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+                byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 // Add the bottom point on the antialiasing list
@@ -260,7 +258,7 @@
 
         while ([antiAliasingPoints popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
-            byteIndex = (bytesPerRow * y) + x * bytesPerPixel;
+            byteIndex = (bytesPerRow * roundf(y)) + roundf(x) * bytesPerPixel;
             color = getColorCode(byteIndex, imageData);
 
             if (!compareColor(ncolor, color, 0))
@@ -293,7 +291,7 @@
             // left
             if (x>0)
             {
-                byteIndex = (bytesPerRow * y) + (x-1) * bytesPerPixel;
+                byteIndex = (bytesPerRow * roundf(y)) + roundf(x - 1) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -325,7 +323,7 @@
             }
             if (x<width)
             {
-                byteIndex = (bytesPerRow * y) + (x+1) * bytesPerPixel;
+                byteIndex = (bytesPerRow * roundf(y)) + roundf(x + 1) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -359,7 +357,7 @@
             
             if (y>0)
             {
-                byteIndex = (bytesPerRow * (y-1)) + x * bytesPerPixel;
+                byteIndex = (bytesPerRow * roundf(y - 1)) + roundf(x) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
@@ -392,7 +390,7 @@
             
             if (y<height)
             {
-                byteIndex = (bytesPerRow * (y+1)) + x * bytesPerPixel;
+                byteIndex = (bytesPerRow * roundf(y + 1)) + roundf(x) * bytesPerPixel;
                 color = getColorCode(byteIndex, imageData);
                 
                 if (!compareColor(ncolor, color, 0))
