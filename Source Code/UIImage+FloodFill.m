@@ -23,12 +23,12 @@
                  If You dont want to use tolerance and want to incress performance Than you can change
                  compareColor(ocolor, color, tolerance) with just ocolor==color which reduse function call.
 */
-- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(NSInteger)tolerance
 {
     return [self floodFillFromPoint:startPoint withColor:newColor andTolerance:tolerance useAntiAlias:YES];
 }
 
-- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(int)tolerance useAntiAlias:(BOOL)antiAlias
+- (UIImage *) floodFillFromPoint:(CGPoint)startPoint withColor:(UIColor *)newColor andTolerance:(NSInteger)tolerance useAntiAlias:(BOOL)antiAlias
 {
     @try
     {
@@ -69,16 +69,16 @@
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
         //Get color at start point 
-		unsigned int byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
+		NSUInteger byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
         
-        unsigned int ocolor = getColorCode(byteIndex, imageData);
+        NSUInteger ocolor = getColorCode(byteIndex, imageData);
         
         if (compareColor(ocolor, 0, 0)) {
             return nil;
         }
         
         //Convert newColor to RGBA value so we can save it to image.
-        int newRed, newGreen, newBlue, newAlpha;
+        NSInteger newRed, newGreen, newBlue, newAlpha;
         
         const CGFloat *components = CGColorGetComponents(newColor.CGColor);
         
@@ -110,7 +110,7 @@
             }
         }
         
-        unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
+        NSUInteger ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
         
         /*
             We are using stack to store point.
@@ -123,8 +123,8 @@
         LinkedListStack *points = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         LinkedListStack *antiAliasingPoints = [[LinkedListStack alloc] initWithCapacity:500 incrementSize:500 andMultiplier:height];
         
-        int x = roundf(startPoint.x);
-        int y = roundf(startPoint.y);
+        NSInteger x = roundf(startPoint.x);
+        NSInteger y = roundf(startPoint.y);
         
         [points pushFrontX:x andY:y];
         
@@ -136,7 +136,7 @@
             If you are familer with flood fill than got to Scanline Floodfill Algorithm With Stack (floodFillScanlineStack)
         */
         
-        unsigned int color;
+        NSUInteger color;
         BOOL spanLeft,spanRight;
         
         while ([points popFront:&x andY:&y] != INVALID_NODE_CONTENT)
@@ -250,11 +250,11 @@
         
         // For each point marked
         // perform antialiasing on the same pixel, plus the top,left,bottom and right pixel
-        unsigned int antialiasColor = getColorCodeFromUIColor(newColor,bitmapInfo&kCGBitmapByteOrderMask );
-        int red1   = ((0xff000000 & antialiasColor) >> 24);
-        int green1 = ((0x00ff0000 & antialiasColor) >> 16);
-        int blue1  = ((0x0000ff00 & antialiasColor) >> 8);
-        int alpha1 =  (0x000000ff & antialiasColor);
+        NSUInteger antialiasColor = getColorCodeFromUIColor(newColor,bitmapInfo&kCGBitmapByteOrderMask );
+        NSInteger red1   = ((0xff000000 & antialiasColor) >> 24);
+        NSInteger green1 = ((0x00ff0000 & antialiasColor) >> 16);
+        NSInteger blue1  = ((0x0000ff00 & antialiasColor) >> 8);
+        NSInteger alpha1 =  (0x000000ff & antialiasColor);
 
         while ([antiAliasingPoints popFront:&x andY:&y] != INVALID_NODE_CONTENT)
         {
@@ -263,10 +263,10 @@
 
             if (!compareColor(ncolor, color, 0))
             {
-                int red2   = ((0xff000000 & color) >> 24);
-                int green2 = ((0x00ff0000 & color) >> 16);
-                int blue2 = ((0x0000ff00 & color) >> 8);
-                int alpha2 =  (0x000000ff & color);
+                NSInteger red2   = ((0xff000000 & color) >> 24);
+                NSInteger green2 = ((0x00ff0000 & color) >> 16);
+                NSInteger blue2 = ((0x0000ff00 & color) >> 8);
+                NSInteger alpha2 =  (0x000000ff & color);
 
                 if (antiAlias) {
                     imageData[byteIndex + 0] = (red1 + red2) / 2;
@@ -296,10 +296,10 @@
                 
                 if (!compareColor(ncolor, color, 0))
                 {
-                    int red2   = ((0xff000000 & color) >> 24);
-                    int green2 = ((0x00ff0000 & color) >> 16);
-                    int blue2 = ((0x0000ff00 & color) >> 8);
-                    int alpha2 =  (0x000000ff & color);
+                    NSInteger red2   = ((0xff000000 & color) >> 24);
+                    NSInteger green2 = ((0x00ff0000 & color) >> 16);
+                    NSInteger blue2 = ((0x0000ff00 & color) >> 8);
+                    NSInteger alpha2 =  (0x000000ff & color);
                     
                     if (antiAlias) {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
@@ -328,10 +328,10 @@
                 
                 if (!compareColor(ncolor, color, 0))
                 {
-                    int red2   = ((0xff000000 & color) >> 24);
-                    int green2 = ((0x00ff0000 & color) >> 16);
-                    int blue2 = ((0x0000ff00 & color) >> 8);
-                    int alpha2 =  (0x000000ff & color);
+                    NSInteger red2   = ((0xff000000 & color) >> 24);
+                    NSInteger green2 = ((0x00ff0000 & color) >> 16);
+                    NSInteger blue2 = ((0x0000ff00 & color) >> 8);
+                    NSInteger alpha2 =  (0x000000ff & color);
                     
                     if (antiAlias) {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
@@ -362,10 +362,10 @@
                 
                 if (!compareColor(ncolor, color, 0))
                 {
-                    int red2   = ((0xff000000 & color) >> 24);
-                    int green2 = ((0x00ff0000 & color) >> 16);
-                    int blue2 = ((0x0000ff00 & color) >> 8);
-                    int alpha2 =  (0x000000ff & color);
+                    NSInteger red2   = ((0xff000000 & color) >> 24);
+                    NSInteger green2 = ((0x00ff0000 & color) >> 16);
+                    NSInteger blue2 = ((0x0000ff00 & color) >> 8);
+                    NSInteger alpha2 =  (0x000000ff & color);
                     
                     if (antiAlias) {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
@@ -395,10 +395,10 @@
                 
                 if (!compareColor(ncolor, color, 0))
                 {
-                    int red2   = ((0xff000000 & color) >> 24);
-                    int green2 = ((0x00ff0000 & color) >> 16);
-                    int blue2 = ((0x0000ff00 & color) >> 8);
-                    int alpha2 =  (0x000000ff & color);
+                    NSInteger red2   = ((0xff000000 & color) >> 24);
+                    NSInteger green2 = ((0x00ff0000 & color) >> 16);
+                    NSInteger blue2 = ((0x0000ff00 & color) >> 8);
+                    NSInteger alpha2 =  (0x000000ff & color);
                     
                     if (antiAlias) {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
@@ -453,12 +453,12 @@
  
     Converting to integer make comperation easy.
 */
-unsigned int getColorCode (unsigned int byteIndex, unsigned char *imageData)
+NSUInteger getColorCode (NSUInteger byteIndex, unsigned char *imageData)
 {
-    unsigned int red   = imageData[byteIndex];
-    unsigned int green = imageData[byteIndex + 1];
-    unsigned int blue  = imageData[byteIndex + 2];
-    unsigned int alpha = imageData[byteIndex + 3];
+    NSUInteger red   = imageData[byteIndex];
+    NSUInteger green = imageData[byteIndex + 1];
+    NSUInteger blue  = imageData[byteIndex + 2];
+    NSUInteger alpha = imageData[byteIndex + 3];
     
     return (red << 24) | (green << 16) | (blue << 8) | alpha;
 }
@@ -468,25 +468,25 @@ unsigned int getColorCode (unsigned int byteIndex, unsigned char *imageData)
  
     If color is between tolerance rancge than it return true other wise false.
 */
-bool compareColor (unsigned int color1, unsigned int color2, int tolorance)
+bool compareColor (NSUInteger color1, NSUInteger color2, NSInteger tolorance)
 {
     if(color1 == color2)
         return true;
     
-    int red1   = ((0xff000000 & color1) >> 24);
-    int green1 = ((0x00ff0000 & color1) >> 16);
-    int blue1  = ((0x0000ff00 & color1) >> 8);
-    int alpha1 =  (0x000000ff & color1);
+    NSInteger red1   = ((0xff000000 & color1) >> 24);
+    NSInteger green1 = ((0x00ff0000 & color1) >> 16);
+    NSInteger blue1  = ((0x0000ff00 & color1) >> 8);
+    NSInteger alpha1 =  (0x000000ff & color1);
     
-    int red2   = ((0xff000000 & color2) >> 24);
-    int green2 = ((0x00ff0000 & color2) >> 16);
-    int blue2  = ((0x0000ff00 & color2) >> 8);
-    int alpha2 =  (0x000000ff & color2);
+    NSInteger red2   = ((0xff000000 & color2) >> 24);
+    NSInteger green2 = ((0x00ff0000 & color2) >> 16);
+    NSInteger blue2  = ((0x0000ff00 & color2) >> 8);
+    NSInteger alpha2 =  (0x000000ff & color2);
     
-    int diffRed   = abs(red2   - red1);
-    int diffGreen = abs(green2 - green1);
-    int diffBlue  = abs(blue2  - blue1);
-    int diffAlpha = abs(alpha2 - alpha1);
+    NSInteger diffRed   = labs(red2   - red1);
+    NSInteger diffGreen = labs(green2 - green1);
+    NSInteger diffBlue  = labs(blue2  - blue1);
+    NSInteger diffAlpha = labs(alpha2 - alpha1);
     
     if( diffRed   > tolorance ||
         diffGreen > tolorance ||
@@ -499,10 +499,10 @@ bool compareColor (unsigned int color1, unsigned int color2, int tolorance)
     return true;
 }
 
-unsigned int getColorCodeFromUIColor(UIColor *color, CGBitmapInfo orderMask)
+NSUInteger getColorCodeFromUIColor(UIColor *color, CGBitmapInfo orderMask)
 {
     //Convert newColor to RGBA value so we can save it to image.
-    int newRed, newGreen, newBlue, newAlpha;
+    NSInteger newRed, newGreen, newBlue, newAlpha;
     
     const CGFloat *components = CGColorGetComponents(color.CGColor);
     
@@ -539,7 +539,7 @@ unsigned int getColorCodeFromUIColor(UIColor *color, CGBitmapInfo orderMask)
         newAlpha = 255;
     }
     
-    unsigned int ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
+    NSUInteger ncolor = (newRed << 24) | (newGreen << 16) | (newBlue << 8) | newAlpha;
 
     return ncolor;
 }
