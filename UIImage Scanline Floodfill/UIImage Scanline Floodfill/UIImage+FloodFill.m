@@ -71,7 +71,7 @@
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         
         //Get color at start point 
-		NSUInteger byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
+        NSUInteger byteIndex = (bytesPerRow * roundf(startPoint.y)) + roundf(startPoint.x) * bytesPerPixel;
         
         NSUInteger ocolor = getColorCode(byteIndex, imageData);
         

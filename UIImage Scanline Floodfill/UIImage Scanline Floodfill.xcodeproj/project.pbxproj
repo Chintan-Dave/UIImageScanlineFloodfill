@@ -23,6 +23,9 @@
 		18BB5872179441110025F8DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB5871179441110025F8DB /* ViewController.m */; };
 		18F9BE0B1795885100F717C2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F9BE0A1795885100F717C2 /* QuartzCore.framework */; };
 		18F9BE0E17958C7200F717C2 /* FloodFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9BE0D17958BEF00F717C2 /* FloodFillImageView.m */; };
+		369C497420230AE900FD64B5 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C497320230AE900FD64B5 /* home.png */; };
+		369C497620230B7E00FD64B5 /* toys.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 369C497520230B7D00FD64B5 /* toys.jpg */; };
+		369C497A2023107E00FD64B5 /* thor.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 369C49792023107D00FD64B5 /* thor.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		18F9BE0A1795885100F717C2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18F9BE0C17958BEF00F717C2 /* FloodFillImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloodFillImageView.h; sourceTree = "<group>"; };
 		18F9BE0D17958BEF00F717C2 /* FloodFillImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FloodFillImageView.m; sourceTree = "<group>"; };
+		369C497320230AE900FD64B5 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = ../../Images/home.png; sourceTree = "<group>"; };
+		369C497520230B7D00FD64B5 /* toys.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = toys.jpg; sourceTree = "<group>"; };
+		369C49792023107D00FD64B5 /* thor.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thor.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,9 @@
 		184AEFEF1796C64000468401 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				369C49792023107D00FD64B5 /* thor.jpeg */,
+				369C497520230B7D00FD64B5 /* toys.jpg */,
+				369C497320230AE900FD64B5 /* home.png */,
 				188052FC1797F95A00503DA7 /* star.png */,
 			);
 			name = Images;
@@ -198,7 +207,10 @@
 				18BB586A179441110025F8DB /* Default@2x.png in Resources */,
 				18BB586C179441110025F8DB /* Default-568h@2x.png in Resources */,
 				18BB586F179441110025F8DB /* MainStoryboard.storyboard in Resources */,
+				369C497420230AE900FD64B5 /* home.png in Resources */,
+				369C497620230B7E00FD64B5 /* toys.jpg in Resources */,
 				188052FD1797F95A00503DA7 /* star.png in Resources */,
+				369C497A2023107E00FD64B5 /* thor.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

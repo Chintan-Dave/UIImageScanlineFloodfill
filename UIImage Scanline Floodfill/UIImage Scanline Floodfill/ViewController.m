@@ -10,17 +10,22 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) UIImage *selectedImage;
+
 @end
 
 @implementation ViewController
 
 @synthesize txtTolerance;
 @synthesize imageView;
+@synthesize selectedImage;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+  
+    imageView.tolorance = [txtTolerance.text intValue];
+    selectedImage = imageView.image;
     imageView.newcolor = [UIColor redColor];
 }
 
@@ -28,7 +33,7 @@
 {
     [txtTolerance resignFirstResponder];
     imageView.tolorance = [txtTolerance.text intValue];
-    [imageView setImage:[UIImage imageNamed:@"star.png"]];
+    [imageView setImage:selectedImage];
 }
 
 - (IBAction)btnColorTap:(UIButton *)sender
@@ -51,6 +56,12 @@
             imageView.newcolor = [UIColor darkGrayColor];
             break;
     }
+}
+
+- (IBAction)btnChangeImageTap:(UIButton *)sender
+{
+    imageView.image = [sender imageForState:UIControlStateNormal];
+    selectedImage = imageView.image;
 }
 
 @end

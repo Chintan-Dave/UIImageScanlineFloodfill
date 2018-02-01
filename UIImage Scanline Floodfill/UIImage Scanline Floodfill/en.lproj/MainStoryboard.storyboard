@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TRl-VU-BEc">
-                                <rect key="frame" x="10" y="30" width="355" height="465"/>
+                                <rect key="frame" x="10" y="30" width="355" height="617"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ljV-RH-AVX">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
@@ -64,14 +64,11 @@
                                         </subviews>
                                     </stackView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" translatesAutoresizingMaskIntoConstraints="NO" id="IdD-QP-dyj" customClass="FloodFillImageView">
-                                        <rect key="frame" x="0.0" y="60" width="355" height="355"/>
+                                        <rect key="frame" x="0.0" y="60" width="355" height="402"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="IdD-QP-dyj" secondAttribute="height" multiplier="1:1" id="FPS-i4-Rmz"/>
-                                        </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-M9-LzN">
-                                        <rect key="frame" x="0.0" y="435" width="355" height="30"/>
+                                        <rect key="frame" x="0.0" y="482" width="355" height="30"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyd-XU-0P0">
                                                 <rect key="frame" x="0.0" y="0.0" width="67" height="30"/>
@@ -150,6 +147,42 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3eN-8t-XAS">
+                                        <rect key="frame" x="0.0" y="532" width="355" height="85"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZF-Or-Fx9">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="4ZF-Or-Fx9" secondAttribute="height" multiplier="1:1" id="DAc-qI-FGs"/>
+                                                </constraints>
+                                                <state key="normal" image="star.png"/>
+                                                <connections>
+                                                    <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="R9S-gg-6a6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sw-F6-XRm">
+                                                <rect key="frame" x="90" y="0.0" width="85" height="85"/>
+                                                <state key="normal" image="home.png"/>
+                                                <connections>
+                                                    <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="xNe-Rj-phm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FN8-fS-gTk">
+                                                <rect key="frame" x="180" y="0.0" width="85" height="85"/>
+                                                <state key="normal" image="toys.jpg"/>
+                                                <connections>
+                                                    <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="tSZ-h7-ocC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZW-8n-iAa">
+                                                <rect key="frame" x="270" y="0.0" width="85" height="85"/>
+                                                <state key="normal" image="thor.jpeg"/>
+                                                <connections>
+                                                    <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="ydU-H4-bv3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -157,6 +190,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="TRl-VU-BEc" secondAttribute="trailing" constant="10" id="C1X-NK-cib"/>
                             <constraint firstItem="TRl-VU-BEc" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="10" id="Hhd-78-glH"/>
+                            <constraint firstItem="GUN-nJ-3ZX" firstAttribute="top" secondItem="TRl-VU-BEc" secondAttribute="bottom" constant="20" id="tIw-bi-534"/>
                             <constraint firstItem="TRl-VU-BEc" firstAttribute="top" secondItem="GuS-RS-4yW" secondAttribute="bottom" constant="10" id="y88-M0-5pb"/>
                         </constraints>
                     </view>
@@ -170,6 +204,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home.png" width="640" height="640"/>
         <image name="star.png" width="640" height="640"/>
+        <image name="thor.jpeg" width="1199" height="788"/>
+        <image name="toys.jpg" width="1600" height="1200"/>
     </resources>
 </document>
