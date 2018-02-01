@@ -24,12 +24,6 @@
     imageView.newcolor = [UIColor redColor];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)btnSetTap:(UIButton *)sender
 {
     [txtTolerance resignFirstResponder];
@@ -58,4 +52,5 @@
             break;
     }
 }
+
 @end

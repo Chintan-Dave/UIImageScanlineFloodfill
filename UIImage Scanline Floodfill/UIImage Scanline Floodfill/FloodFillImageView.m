@@ -24,7 +24,8 @@
     
     //Call function to flood fill and get new image with filled color
     UIImage *image1 = [self.image floodFillFromPoint:tpoint
-                                           withColor:newcolor andTolerance:tolorance];
+                                           withColor:newcolor
+                                        andTolerance:tolorance];
     
     dispatch_async(dispatch_get_main_queue(), ^(void)
     {
