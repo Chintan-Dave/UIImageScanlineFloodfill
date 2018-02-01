@@ -45,15 +45,17 @@
         
         NSUInteger width = CGImageGetWidth(imageRef);
         NSUInteger height = CGImageGetHeight(imageRef);
-        
-        unsigned char *imageData = malloc(height * width * 4);
-        
         NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(imageRef) / 8;
         NSUInteger bytesPerRow = CGImageGetBytesPerRow(imageRef);
         NSUInteger bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
-        
+
+        unsigned char *imageData = malloc(height * width * bytesPerPixel);
+      
         CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-        if (kCGImageAlphaLast == (uint32_t)bitmapInfo || kCGImageAlphaFirst == (uint32_t)bitmapInfo) {
+      
+        if (kCGImageAlphaLast == (uint32_t)bitmapInfo ||
+            kCGImageAlphaFirst == (uint32_t)bitmapInfo)
+        {
             bitmapInfo = (uint32_t)kCGImageAlphaPremultipliedLast;
         }
         
@@ -73,7 +75,8 @@
         
         NSUInteger ocolor = getColorCode(byteIndex, imageData);
         
-        if (compareColor(ocolor, 0, 0)) {
+        if (compareColor(ocolor, 0, 0))
+        {
             return nil;
         }
         
@@ -268,12 +271,15 @@
                 NSInteger blue2 = ((0x0000ff00 & color) >> 8);
                 NSInteger alpha2 =  (0x000000ff & color);
 
-                if (antiAlias) {
+                if (antiAlias)
+                {
                     imageData[byteIndex + 0] = (red1 + red2) / 2;
                     imageData[byteIndex + 1] = (green1 + green2) / 2;
                     imageData[byteIndex + 2] = (blue1 + blue2) / 2;
                     imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
-                } else {
+                }
+                else
+                {
                     imageData[byteIndex + 0] = red2;
                     imageData[byteIndex + 1] = green2;
                     imageData[byteIndex + 2] = blue2;
@@ -321,6 +327,7 @@
 #endif
                 }
             }
+          
             if (x<width)
             {
                 byteIndex = (bytesPerRow * roundf(y)) + MIN(width,roundf(x + 1)) * bytesPerPixel;
@@ -333,12 +340,15 @@
                     NSInteger blue2 = ((0x0000ff00 & color) >> 8);
                     NSInteger alpha2 =  (0x000000ff & color);
                     
-                    if (antiAlias) {
+                    if (antiAlias)
+                    {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
                         imageData[byteIndex + 1] = (green1 + green2) / 2;
                         imageData[byteIndex + 2] = (blue1 + blue2) / 2;
                         imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
-                    } else {
+                    }
+                    else
+                    {
                         imageData[byteIndex + 0] = red2;
                         imageData[byteIndex + 1] = green2;
                         imageData[byteIndex + 2] = blue2;
@@ -367,12 +377,15 @@
                     NSInteger blue2 = ((0x0000ff00 & color) >> 8);
                     NSInteger alpha2 =  (0x000000ff & color);
                     
-                    if (antiAlias) {
+                    if (antiAlias)
+                    {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
                         imageData[byteIndex + 1] = (green1 + green2) / 2;
                         imageData[byteIndex + 2] = (blue1 + blue2) / 2;
                         imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
-                    } else {
+                    }
+                    else
+                    {
                         imageData[byteIndex + 0] = red2;
                         imageData[byteIndex + 1] = green2;
                         imageData[byteIndex + 2] = blue2;
@@ -400,12 +413,15 @@
                     NSInteger blue2 = ((0x0000ff00 & color) >> 8);
                     NSInteger alpha2 =  (0x000000ff & color);
                     
-                    if (antiAlias) {
+                    if (antiAlias)
+                    {
                         imageData[byteIndex + 0] = (red1 + red2) / 2;
                         imageData[byteIndex + 1] = (green1 + green2) / 2;
                         imageData[byteIndex + 2] = (blue1 + blue2) / 2;
                         imageData[byteIndex + 3] = (alpha1 + alpha2) / 2;
-                    } else {
+                    }
+                    else
+                    {
                         imageData[byteIndex + 0] = red2;
                         imageData[byteIndex + 1] = green2;
                         imageData[byteIndex + 2] = blue2;
