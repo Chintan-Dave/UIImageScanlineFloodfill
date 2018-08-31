@@ -148,4 +148,11 @@
   return imagePoint;
 }
 
+- (void)setImage:(UIImage *)image {
+  NSData *imageData = UIImageJPEGRepresentation(image, 1);
+  UIImage *newImage = [UIImage imageWithData:imageData];
+  
+  [super setImage:newImage];
+}
+
 @end

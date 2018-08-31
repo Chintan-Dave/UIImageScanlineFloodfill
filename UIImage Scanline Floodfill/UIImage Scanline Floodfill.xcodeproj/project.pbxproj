@@ -26,6 +26,7 @@
 		369C497420230AE900FD64B5 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C497320230AE900FD64B5 /* home.png */; };
 		369C497620230B7E00FD64B5 /* toys.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 369C497520230B7D00FD64B5 /* toys.jpg */; };
 		369C497A2023107E00FD64B5 /* thor.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 369C49792023107D00FD64B5 /* thor.jpeg */; };
+		9CFB7FFD21391A6F009E36C0 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFB7FFC21391A6F009E36C0 /* box.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		369C497320230AE900FD64B5 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = ../../Images/home.png; sourceTree = "<group>"; };
 		369C497520230B7D00FD64B5 /* toys.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = toys.jpg; sourceTree = "<group>"; };
 		369C49792023107D00FD64B5 /* thor.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thor.jpeg; sourceTree = "<group>"; };
+		9CFB7FFC21391A6F009E36C0 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				369C497520230B7D00FD64B5 /* toys.jpg */,
 				369C497320230AE900FD64B5 /* home.png */,
 				188052FC1797F95A00503DA7 /* star.png */,
+				9CFB7FFC21391A6F009E36C0 /* box.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -172,7 +175,7 @@
 		18BB584A179441110025F8DB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = ZWT;
 				TargetAttributes = {
 					18BB5851179441110025F8DB = {
@@ -209,6 +212,7 @@
 				18BB586F179441110025F8DB /* MainStoryboard.storyboard in Resources */,
 				369C497420230AE900FD64B5 /* home.png in Resources */,
 				369C497620230B7E00FD64B5 /* toys.jpg in Resources */,
+				9CFB7FFD21391A6F009E36C0 /* box.png in Resources */,
 				188052FD1797F95A00503DA7 /* star.png in Resources */,
 				369C497A2023107E00FD64B5 /* thor.jpeg in Resources */,
 			);
@@ -263,11 +267,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -310,11 +316,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;

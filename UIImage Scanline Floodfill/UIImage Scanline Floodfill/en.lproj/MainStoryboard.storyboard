@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,7 +65,7 @@
                                     </stackView>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" translatesAutoresizingMaskIntoConstraints="NO" id="IdD-QP-dyj" customClass="FloodFillImageView">
                                         <rect key="frame" x="0.0" y="60" width="355" height="402"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-M9-LzN">
                                         <rect key="frame" x="0.0" y="482" width="355" height="30"/>
@@ -162,7 +162,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sw-F6-XRm">
                                                 <rect key="frame" x="90" y="0.0" width="85" height="85"/>
-                                                <state key="normal" image="home.png"/>
+                                                <state key="normal" image="thor.jpeg"/>
                                                 <connections>
                                                     <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="xNe-Rj-phm"/>
                                                 </connections>
@@ -176,7 +176,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZW-8n-iAa">
                                                 <rect key="frame" x="270" y="0.0" width="85" height="85"/>
-                                                <state key="normal" image="thor.jpeg"/>
+                                                <state key="normal" image="box.png"/>
                                                 <connections>
                                                     <action selector="btnChangeImageTap:" destination="2" eventType="touchUpInside" id="ydU-H4-bv3"/>
                                                 </connections>
@@ -204,7 +204,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home.png" width="640" height="640"/>
+        <image name="box.png" width="1024" height="980"/>
         <image name="star.png" width="640" height="640"/>
         <image name="thor.jpeg" width="1199" height="788"/>
         <image name="toys.jpg" width="1600" height="1200"/>

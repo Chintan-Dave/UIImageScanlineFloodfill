@@ -79,7 +79,7 @@
         {
             return nil;
         }
-        
+      
         //Convert newColor to RGBA value so we can save it to image.
         NSInteger newRed, newGreen, newBlue, newAlpha;
         
@@ -362,7 +362,6 @@
                     imageData[byteIndex + 3] = 255;
 #endif
                 }
-
             }
             
             if (y>0)
