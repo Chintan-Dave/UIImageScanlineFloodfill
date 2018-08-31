@@ -39,4 +39,10 @@ If you wan to use this directly in your project that do as follow:
 
 `UIImage *image1 = [self.image floodFillFromPoint:tpoint withColor:[UIColor grayColor] andTolerance:tolerance];`
 
+### Limitation(s)
+We have some hard time dealing with the Alpha channel (transparency). We are still working on that.  
+As a workground right now we are replacinng Alpha to White color by converting an image to JPEG.  
+If you don't want to use this behaviour you can comment (Or Remove) frollowinng method from FloodFillImageView  
+`- (void)setImage:(UIImage *)image`
+
 #### License : [MIT LICENSE FILE](https://github.com/chinatndave/UIImageScanlineFloodfill/blob/master/LICENSE)
